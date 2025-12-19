@@ -1,22 +1,23 @@
-<Lucky>
+<lucky>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lucky Draw • Firebase Ready</title>
+
 <script type="module">
-  // Firebase import (client-side)
+  // Firebase import
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-  // 🔥 Firebase Config (Already integrated)
+  // 🔥 Your Firebase Config
   const firebaseConfig = {
-    apiKey: "AIzaSyA0_NaAYDKQuoEO58Od7LhZ5enZA-GIP9M",
-    authDomain: "lucky-draw-12ebd.firebaseapp.com",
-    projectId: "lucky-draw-12ebd",
-    storageBucket: "lucky-draw-12ebd.firebasestorage.app",
-    messagingSenderId: "695988718336",
-    appId: "1:695988718336:web:0d14e5c69905e8772481e5"
+    apiKey: "AIzaSyCsE_hhcIGI0gq8uh7yoHncS2RZD30cDVM",
+    authDomain: "lucky-draw-cfd49.firebaseapp.com",
+    projectId: "lucky-draw-cfd49",
+    storageBucket: "lucky-draw-cfd49.firebasestorage.app",
+    messagingSenderId: "1033223243680",
+    appId: "1:1033223243680:web:299356a0b9ea8c668806c5"
   };
 
   // Initialize Firebase
@@ -54,7 +55,8 @@
     const userRef = doc(db, "users", currentUser);
     await updateDoc(userRef, {
       coins: increment(reward),
-      draws: increment(1)
+      draws: increment(1),
+      rewards: increment(reward)
     });
     loadUserData();
   }
@@ -88,15 +90,6 @@
     loadUserData();
   }
 
-  function showDashboard(){
-    document.getElementById('login-page').style.display='none';
-    document.getElementById('dashboard-page').style.display='block';
-    loadUserData();
-  }
-
-  function scrollToDraw(){
-    document.getElementById('spin-wheel').scrollIntoView({behavior:'smooth'});
-  }
 </script>
 
 <style>
@@ -110,14 +103,12 @@ header h1{margin:0;font-size:28px;}
 .input-field{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:none;}
 .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px;}
 .stat{background:rgba(0,0,0,0.4);padding:15px;border-radius:12px;text-align:center;}
-.spin-wheel{width:220px;height:220px;border-radius:50%;margin:20px auto;background:conic-gradient(#00c6ff 0deg 60deg,#0072ff 60deg 120deg,#00c6ff 120deg 180deg,#0072ff 180deg 240deg,#00c6ff 240deg 300deg,#0072ff 300deg 360deg);display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;box-shadow:0 0 20px rgba(0,198,255,0.8);animation:spin 6s linear infinite;}
-@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.spin-wheel{width:220px;height:220px;border-radius:50%;margin:20px auto;background:conic-gradient(#00c6ff 0deg 60deg,#0072ff 60deg 120deg,#00c6ff 120deg 180deg,#0072ff 180deg 240deg,#00c6ff 240deg 300deg,#0072ff 300deg 360deg);display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;box-shadow:0 0 20px rgba(0,198,255,0.8);}
 .mobile-nav{position:fixed; bottom:0; left:0; right:0; background:rgba(0,0,0,0.7); display:flex; justify-content:space-around; padding:10px 0;}
 .mobile-nav a{color:#00c6ff; text-decoration:none; font-size:14px; cursor:pointer;}
 </style>
 
 <body>
-
 <header>
 <h1>Lucky Draw • Firebase Ready</h1>
 </header>
@@ -168,8 +159,8 @@ header h1{margin:0;font-size:28px;}
 <footer>© 2025 Lucky Draw | Firebase Ready</footer>
 
 <div class="mobile-nav">
-<a onclick="showDashboard()">Home</a>
-<a onclick="scrollToDraw()">Draw</a>
+<a onclick="document.getElementById('dashboard-page').scrollIntoView()">Dashboard</a>
+<a onclick="document.getElementById('spin-wheel').scrollIntoView({behavior:'smooth'})">Spin</a>
 <a>Wallet</a>
 <a>Profile</a>
 </div>
