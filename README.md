@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucky Draw App</title>
+<title>Lucky Draw App • Firebase Auth</title>
+
 <script type="module">
-  // Firebase imports
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-  // 🔥 Your Firebase Config
   const firebaseConfig = {
     apiKey: "AIzaSyA0_NaAYDKQuoEO58Od7LhZ5enZA-GIP9M",
     authDomain: "lucky-draw-12ebd.firebaseapp.com",
@@ -21,24 +21,44 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const auth = getAuth(app);
   let currentUser = null;
 
-  // Login / Signup
-  async function loginUser() {
-    const username = document.getElementById('username').value.trim();
-    if(!username){ alert('Enter username'); return; }
-    currentUser = username;
-    const userRef = doc(db, "users", username);
-    const userSnap = await getDoc(userRef);
-    if(!userSnap.exists()){
-      await setDoc(userRef, { coins: 1250, draws: 0, rewards: 0 });
+  async function signupUser() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if(!email || !password){ alert('Enter email and password'); return; }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      currentUser = user.uid;
+      await setDoc(doc(db,'users',user.uid), {coins:1250, draws:0, rewards:0});
+      alert('Account created: '+user.email);
+      document.getElementById('login-page').style.display='none';
+      document.getElementById('app-page').style.display='block';
+      loadUserData();
+    } catch(error) {
+      alert(error.message);
     }
-    document.getElementById('login-page').style.display = 'none';
-    document.getElementById('app-page').style.display = 'block';
-    loadUserData();
   }
 
-  // Load user data
+  async function loginUser() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if(!email || !password){ alert('Enter email and password'); return; }
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      currentUser = user.uid;
+      alert('Logged in: '+user.email);
+      document.getElementById('login-page').style.display='none';
+      document.getElementById('app-page').style.display='block';
+      loadUserData();
+    } catch(error) {
+      alert(error.message);
+    }
+  }
+
   async function loadUserData(){
     const userRef = doc(db, "users", currentUser);
     const userSnap = await getDoc(userRef);
@@ -48,20 +68,22 @@
     document.getElementById('rewards').innerText = data.rewards;
   }
 
-  // Spin Wheel
   async function spinWheel(){
     const reward = Math.floor(Math.random()*500+50);
-    alert('You won '+reward+' coins!');
-    const userRef = doc(db, "users", currentUser);
-    await updateDoc(userRef, {
-      coins: increment(reward),
-      draws: increment(1),
-      rewards: increment(reward)
-    });
-    loadUserData();
+    const wheel = document.getElementById('spin-wheel');
+    const deg = Math.floor(Math.random()*360)+720; // 2 spins + random
+    wheel.style.transition = 'transform 3s ease-out';
+    wheel.style.transform = `rotate(${deg}deg)`;
+    setTimeout(async ()=>{
+      alert('You won '+reward+' coins!');
+      const userRef = doc(db, "users", currentUser);
+      await updateDoc(userRef, { coins: increment(reward), draws: increment(1), rewards: increment(reward) });
+      loadUserData();
+      wheel.style.transition='none';
+      wheel.style.transform='rotate(0deg)';
+    },3000);
   }
 
-  // Buy Chance
   async function buyChances(){
     const count = parseInt(document.getElementById('buy-chances').value);
     if(isNaN(count)||count<=0){ alert('Enter valid number'); return; }
@@ -73,7 +95,6 @@
     loadUserData();
   }
 
-  // Deposit
   async function depositCoins(){
     const amount = parseInt(document.getElementById('deposit-amount').value);
     if(isNaN(amount)||amount<=0){ alert('Enter valid amount'); return; }
@@ -82,7 +103,6 @@
     loadUserData();
   }
 
-  // Withdraw
   async function withdrawCoins(){
     const amount = parseInt(document.getElementById('withdraw-amount').value);
     if(isNaN(amount)||amount<=0){ alert('Enter valid amount'); return; }
@@ -95,16 +115,17 @@
 </script>
 
 <style>
-body { margin:0; font-family:'Segoe UI',sans-serif; background:#121212; color:#fff; }
-header{background:#1f1f1f; padding:15px; text-align:center; font-size:24px; font-weight:bold; }
+body{margin:0;font-family:'Segoe UI',sans-serif;background:#121212;color:#fff;}
+header{background:#1f1f1f;padding:15px;text-align:center;font-size:24px;font-weight:bold;}
 .container{padding:20px;}
-.card{background:#1e1e1e; border-radius:12px; padding:20px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.5);}
-.btn{background:#00c6ff; color:#000; padding:10px 18px; border:none; border-radius:25px; cursor:pointer; font-weight:bold; margin-top:10px;}
-.input-field{width:100%; padding:10px; border-radius:8px; margin:6px 0; border:none; background:#2a2a2a; color:#fff;}
-.stats{display:flex; justify-content:space-around; margin-top:15px;}
+.card{background:#1e1e1e;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:0 5px 15px rgba(0,0,0,0.5);}
+.btn{background:#00c6ff;color:#000;padding:10px 18px;border:none;border-radius:25px;cursor:pointer;font-weight:bold;margin-top:10px;}
+.input-field{width:100%;padding:10px;border-radius:8px;margin:6px 0;border:none;background:#2a2a2a;color:#fff;}
+.stats{display:flex;justify-content:space-around;margin-top:15px;}
 .stat{text-align:center;}
-.spin-wheel{width:200px; height:200px; margin:20px auto; border-radius:50%; background:conic-gradient(#00c6ff 0deg 60deg,#0072ff 60deg 120deg,#00c6ff 120deg 180deg,#0072ff 180deg 240deg,#00c6ff 240deg 300deg,#0072ff 300deg 360deg); display:flex; align-items:center; justify-content:center; font-weight:bold; color:#000; box-shadow:0 0 15px #00c6ff;}
-footer{text-align:center; padding:10px; background:#1f1f1f; font-size:14px;}
+.spin-wheel{width:200px;height:200px;margin:20px auto;border-radius:50%;background:conic-gradient(#00c6ff 0deg 60deg,#0072ff 60deg 120deg,#00c6ff 120deg 180deg,#0072ff 180deg 240deg,#00c6ff 240deg 300deg,#0072ff 300deg 360deg);display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;box-shadow:0 0 15px #00c6ff;}
+footer{text-align:center;padding:10px;background:#1f1f1f;font-size:14px;}
+@media(max-width:480px){.stats{flex-direction:column;}.card{padding:15px;}}
 </style>
 
 <body>
@@ -113,7 +134,9 @@ footer{text-align:center; padding:10px; background:#1f1f1f; font-size:14px;}
 <div class="container" id="login-page">
   <div class="card">
     <h2>Login / Signup</h2>
-    <input type="text" placeholder="Enter username" id="username" class="input-field">
+    <input type="email" id="email" placeholder="Email" class="input-field">
+    <input type="password" id="password" placeholder="Password" class="input-field">
+    <button class="btn" onclick="signupUser()">Sign Up</button>
     <button class="btn" onclick="loginUser()">Login</button>
   </div>
 </div>
@@ -130,7 +153,7 @@ footer{text-align:center; padding:10px; background:#1f1f1f; font-size:14px;}
 
   <div class="card">
     <h2>Spin Wheel</h2>
-    <div class="spin-wheel">SPIN</div>
+    <div class="spin-wheel" id="spin-wheel">SPIN</div>
     <button class="btn" onclick="spinWheel()">Spin Now</button>
   </div>
 
@@ -153,6 +176,6 @@ footer{text-align:center; padding:10px; background:#1f1f1f; font-size:14px;}
   </div>
 </div>
 
-<footer>© 2025 Lucky Draw | Firebase Ready</footer>
+<footer>© 2025 Lucky Draw | Firebase Auth Ready</footer>
 </body>
 </html>
