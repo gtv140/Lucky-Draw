@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Aviator Crash Game Ultimate Demo</title>
+<title>Aviator Crash Game Advanced Demo</title>
 <style>
 body {margin:0; padding:0; overflow:hidden; background:#0a0a0a; font-family:Arial;}
 #gameCanvas {display:block;}
 .ui {
   position:absolute; top:10px; left:50%; transform:translateX(-50%); text-align:center; z-index:100; color:#fff;
 }
-button {padding:12px 18px; margin:5px; border:none; border-radius:8px; font-size:16px; cursor:pointer;}
+button {padding:10px 14px; margin:3px; border:none; border-radius:6px; font-size:14px; cursor:pointer;}
 .start{background:#2ecc71;}
 .cash{background:#f1c40f;}
-.status {margin:5px; font-size:18px;}
-.mult {font-size:22px; margin:5px;}
-.coins {font-size:24px; margin:10px;}
+.status {margin:5px; font-size:16px;}
+.mult {font-size:20px; margin:5px;}
+.coins {font-size:20px; margin:5px;}
+.betControl {margin:5px;}
 .history {
-  position:absolute; top:120px; left:50%; transform:translateX(-50%);
-  background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; max-height:200px; overflow-y:auto;
-  font-size:16px; color:#fff;
+  position:absolute; top:150px; left:50%; transform:translateX(-50%);
+  background:rgba(0,0,0,0.5); padding:10px; border-radius:6px; max-height:180px; overflow-y:auto;
+  font-size:14px; color:#fff;
 }
 </style>
 </head>
@@ -28,13 +29,16 @@ button {padding:12px 18px; margin:5px; border:none; border-radius:8px; font-size
   <h2>Coins: <span id="coins">100</span></h2>
   <h3>Aviator Crash Game ✈️</h3>
   <div class="status" id="status"></div>
-  <button class="start" onclick="startGame()">Start</button>
+  <div class="betControl">
+    Bet Amount: <input type="number" id="betAmount" value="10" min="10" max="1000" step="10">
+    Multiplier: <select id="betMultiplier"><option>1.5</option><option>2</option><option>3</option><option>5</option></select>
+  </div>
+  <button class="start" onclick="startGame()">Start Round</button>
   <button class="cash" onclick="cashOut()">Cash Out</button>
   <div class="mult" id="multiplier">1.00x</div>
 </div>
 
 <div class="history" id="history">History:</div>
-
 <canvas id="gameCanvas"></canvas>
 
 <script>
@@ -49,11 +53,15 @@ canvas.width=window.innerWidth; canvas.height=window.innerHeight;
 let running=false;
 let multiplier=1.00;
 let crashAt=0;
-let plane={x:canvas.width/2, y:canvas.height-100, size:80, trail:[]};
+let plane={x:canvas.width/2, y:canvas.height-100, size:60, trail:[]};
 let graphData=[];
 let particles=[];
 let clouds=[];
 let history=[];
+
+// Users bets
+let userBet = {amount:0, multiplier:0, cashedOut:false, won:0};
+let botUsers = [];
 
 // Sounds
 let coinSound=new Audio('https://freesound.org/data/previews/341/341695_5260870-lq.mp3');
@@ -85,10 +93,9 @@ function drawScene(){
   ctx.lineWidth=3;
   ctx.beginPath();
   for(let i=0;i<graphData.length;i++){
-    let x = i*5;
-    let y = canvas.height - 50 - graphData[i]*50;
-    if(i==0) ctx.moveTo(x,y);
-    else ctx.lineTo(x,y);
+    let x=i*5;
+    let y=canvas.height-50-graphData[i]*50;
+    if(i==0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
   }
   ctx.stroke();
   
@@ -102,7 +109,29 @@ function drawScene(){
   
   // Plane
   ctx.font=plane.size+"px Arial";
-  ctx.fillText("✈️", plane.x - plane.size/2, plane.y);
+  ctx.fillText("✈️", plane.x-plane.size/2, plane.y);
+  
+  // Bet markers
+  let scaleX = 5;
+  if(userBet.amount>0){
+    let x = graphData.length*scaleX;
+    let y = canvas.height-50 - Math.min(multiplier,userBet.multiplier)*50;
+    ctx.fillStyle="#f1c40f";
+    ctx.beginPath();
+    ctx.arc(x,y,8,0,Math.PI*2);
+    ctx.fill();
+  }
+  
+  botUsers.forEach(b=>{
+    if(!b.cashedOut){
+      let x = graphData.length*scaleX;
+      let y = canvas.height-50 - Math.min(multiplier,b.multiplier)*50;
+      ctx.fillStyle="rgba(255,0,0,0.7)";
+      ctx.beginPath();
+      ctx.arc(x,y,6,0,Math.PI*2);
+      ctx.fill();
+    }
+  });
   
   // Particles
   for(let i=0;i<particles.length;i++){
@@ -130,16 +159,29 @@ function createParticles(x,y){
 function updateParticles(){
   for(let i=particles.length-1;i>=0;i--){
     let p=particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.alpha -= 0.02;
+    p.x+=p.vx; p.y+=p.vy; p.alpha-=0.02;
     if(p.alpha<=0) particles.splice(i,1);
   }
 }
 
-// -------- Game Functions --------
+// -------- Start Game --------
 function startGame(){
   if(running) return;
+  // Read user bet
+  let amt = parseInt(document.getElementById('betAmount').value);
+  let mul = parseFloat(document.getElementById('betMultiplier').value);
+  if(amt>coins){alert("Not enough coins"); return;}
+  userBet={amount:amt, multiplier:mul, cashedOut:false, won:0};
+  coins-=amt; updateCoins();
+  
+  // Bots
+  botUsers = [];
+  for(let i=0;i<3;i++){
+    let bMul = (Math.random()*4+1).toFixed(2);
+    let bAmt = Math.floor(Math.random()*(100)+10);
+    botUsers.push({amount:bAmt, multiplier:bMul, cashedOut:false, won:0});
+  }
+  
   running=true;
   multiplier=1.00;
   crashAt=(Math.random()*5+1.5).toFixed(2);
@@ -152,53 +194,71 @@ function startGame(){
   
   let interval=setInterval(()=>{
     if(!running){clearInterval(interval); return;}
-    
-    // Smooth multiplier growth
-    multiplier += 0.02 * (1 + multiplier/10);
+    multiplier+=0.02*(1+multiplier/10);
     document.getElementById('multiplier').innerText=multiplier.toFixed(2)+'x';
     
     // Plane movement
     let planeY = canvas.height-100 - multiplier*50;
-    plane.trail.push({x:plane.x, y:plane.y});
+    plane.trail.push({x:plane.x,y:plane.y});
     if(plane.trail.length>20) plane.trail.shift();
-    plane.y = planeY;
+    plane.y=planeY;
     
-    // Clouds movement
-    clouds.forEach(c=>{
-      c.x -= 0.3;
-      if(c.x<0) c.x = canvas.width + Math.random()*100;
-    });
+    // Clouds
+    clouds.forEach(c=>{c.x-=0.3;if(c.x<0)c.x=canvas.width+Math.random()*100;});
     
     graphData.push(multiplier);
     
-    updateParticles();
+    // Bot cash out
+    botUsers.forEach(b=>{
+      if(!b.cashedOut && multiplier>=b.multiplier){
+        b.cashedOut=true;
+        b.won=Math.floor(b.amount*b.multiplier);
+        coins+=b.won;
+      }
+    });
+    
     drawScene();
+    updateParticles();
+    
+    // Check user cash out auto
+    if(userBet.amount>0 && !userBet.cashedOut && multiplier>=userBet.multiplier){
+      userBet.cashedOut=true;
+      userBet.won=Math.floor(userBet.amount*userBet.multiplier);
+      coins+=userBet.won;
+      coinSound.play();
+      history.push("User auto cash out @ "+userBet.multiplier+"x");
+      updateHistory();
+    }
     
     // Crash
     if(multiplier>=crashAt){
       running=false;
-      document.getElementById('status').innerHTML="<span style='color:#ff6b6b; font-size:24px;'>CRASH 💥 @ "+crashAt+"x</span>";
-      coins-=10; updateCoins();
+      document.getElementById('status').innerHTML="<span style='color:#ff6b6b; font-size:18px;'>CRASH 💥 @ "+crashAt+"x</span>";
+      if(!userBet.cashedOut){userBet.won=0; history.push("User LOST @ crash "+crashAt+"x");}
+      botUsers.forEach(b=>{if(!b.cashedOut){b.won=0;}});
       crashSound.play();
       createParticles(plane.x, plane.y);
-      history.push("CRASH @ "+crashAt+"x");
       updateHistory();
     }
   },50);
 }
 
+// -------- Cash Out --------
 function cashOut(){
-  if(!running) return;
-  running=false;
-  document.getElementById('status').innerText="Cashed out @ "+multiplier.toFixed(2)+'x';
-  coins+=Math.floor(10*multiplier); updateCoins(); coinSound.play();
-  history.push("Cashed out @ "+multiplier.toFixed(2)+"x");
+  if(!running || userBet.cashedOut) return;
+  userBet.cashedOut=true;
+  userBet.won=Math.floor(userBet.amount*multiplier);
+  coins+=userBet.won; updateCoins(); coinSound.play();
+  history.push("User cashed out @ "+multiplier.toFixed(2)+"x");
   updateHistory();
 }
 
+// -------- History --------
 function updateHistory(){
   let histEl=document.getElementById('history');
-  histEl.innerHTML="History:<br>"+history.slice(-10).reverse().join("<br>");
+  let lines = history.slice(-10).reverse();
+  botUsers.forEach((b,i)=>{if(b.cashedOut)lines.push("Bot"+(i+1)+" cashed out @ "+b.multiplier+"x");});
+  histEl.innerHTML="History:<br>"+lines.join("<br>");
 }
 </script>
 </body>
