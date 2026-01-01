@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Aviator Crash Game Demo</title>
+<title>Aviator Crash Game Ultimate Demo</title>
 <style>
 body {margin:0; padding:0; overflow:hidden; background:#0a0a0a; font-family:Arial;}
 #gameCanvas {display:block;}
@@ -15,6 +15,11 @@ button {padding:12px 18px; margin:5px; border:none; border-radius:8px; font-size
 .status {margin:5px; font-size:18px;}
 .mult {font-size:22px; margin:5px;}
 .coins {font-size:24px; margin:10px;}
+.history {
+  position:absolute; top:120px; left:50%; transform:translateX(-50%);
+  background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; max-height:200px; overflow-y:auto;
+  font-size:16px; color:#fff;
+}
 </style>
 </head>
 <body>
@@ -27,6 +32,8 @@ button {padding:12px 18px; margin:5px; border:none; border-radius:8px; font-size
   <button class="cash" onclick="cashOut()">Cash Out</button>
   <div class="mult" id="multiplier">1.00x</div>
 </div>
+
+<div class="history" id="history">History:</div>
 
 <canvas id="gameCanvas"></canvas>
 
@@ -46,13 +53,14 @@ let plane={x:canvas.width/2, y:canvas.height-100, size:80, trail:[]};
 let graphData=[];
 let particles=[];
 let clouds=[];
+let history=[];
 
 // Sounds
 let coinSound=new Audio('https://freesound.org/data/previews/341/341695_5260870-lq.mp3');
 let crashSound=new Audio('https://freesound.org/data/previews/198/198841_285997-lq.mp3');
 
 // -------- Clouds --------
-for(let i=0;i<10;i++){
+for(let i=0;i<15;i++){
   clouds.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height/2, size:Math.random()*50+30});
 }
 
@@ -72,7 +80,7 @@ function drawScene(){
     ctx.fill();
   });
   
-  // Multiplier graph
+  // Graph
   ctx.strokeStyle="#00ff00";
   ctx.lineWidth=3;
   ctx.beginPath();
@@ -96,7 +104,7 @@ function drawScene(){
   ctx.font=plane.size+"px Arial";
   ctx.fillText("✈️", plane.x - plane.size/2, plane.y);
   
-  // Draw particles
+  // Particles
   for(let i=0;i<particles.length;i++){
     let p = particles[i];
     ctx.fillStyle="rgba(255,69,0,"+p.alpha+")";
@@ -137,7 +145,6 @@ function startGame(){
   crashAt=(Math.random()*5+1.5).toFixed(2);
   plane.x=canvas.width/2;
   plane.y=canvas.height-100;
-  plane.size=80;
   plane.trail=[];
   graphData=[];
   particles=[];
@@ -146,7 +153,7 @@ function startGame(){
   let interval=setInterval(()=>{
     if(!running){clearInterval(interval); return;}
     
-    // Smooth easing multiplier growth
+    // Smooth multiplier growth
     multiplier += 0.02 * (1 + multiplier/10);
     document.getElementById('multiplier').innerText=multiplier.toFixed(2)+'x';
     
@@ -156,13 +163,13 @@ function startGame(){
     if(plane.trail.length>20) plane.trail.shift();
     plane.y = planeY;
     
-    graphData.push(multiplier);
-    
-    // Clouds move slowly
+    // Clouds movement
     clouds.forEach(c=>{
       c.x -= 0.3;
       if(c.x<0) c.x = canvas.width + Math.random()*100;
     });
+    
+    graphData.push(multiplier);
     
     updateParticles();
     drawScene();
@@ -174,6 +181,8 @@ function startGame(){
       coins-=10; updateCoins();
       crashSound.play();
       createParticles(plane.x, plane.y);
+      history.push("CRASH @ "+crashAt+"x");
+      updateHistory();
     }
   },50);
 }
@@ -183,6 +192,13 @@ function cashOut(){
   running=false;
   document.getElementById('status').innerText="Cashed out @ "+multiplier.toFixed(2)+'x';
   coins+=Math.floor(10*multiplier); updateCoins(); coinSound.play();
+  history.push("Cashed out @ "+multiplier.toFixed(2)+"x");
+  updateHistory();
+}
+
+function updateHistory(){
+  let histEl=document.getElementById('history');
+  histEl.innerHTML="History:<br>"+history.slice(-10).reverse().join("<br>");
 }
 </script>
 </body>
