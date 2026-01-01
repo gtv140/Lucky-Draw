@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Aviator Crash Game Ultimate Demo</title>
+<title>Aviator Crash Game Ultimate Demo with Sounds</title>
 <style>
 body {margin:0; padding:0; overflow:hidden; background:#0a0a0a; font-family:Arial;}
 #gameCanvas {display:block;}
@@ -64,8 +64,9 @@ let userBet = {amount:0, multiplier:0, cashedOut:false, won:0};
 let botUsers = [];
 
 // Sounds
-let coinSound=new Audio('https://freesound.org/data/previews/341/341695_5260870-lq.mp3');
-let crashSound=new Audio('https://freesound.org/data/previews/198/198841_285997-lq.mp3');
+let crashSound = new Audio('https://freesound.org/data/previews/341/341700_5260870-lq.mp3'); // enhanced crash
+let coinSound = new Audio('https://freesound.org/data/previews/341/341695_5260870-lq.mp3'); // cash-out
+let startSound = new Audio('https://freesound.org/data/previews/501/501469_5121236-lq.mp3'); // start whoosh
 
 // -------- Clouds --------
 for(let i=0;i<15;i++){
@@ -99,6 +100,17 @@ function drawScene(){
   }
   ctx.stroke();
   
+  // Crash line
+  if(!running && multiplier>0){
+    let crashY = canvas.height-50 - crashAt*50;
+    ctx.strokeStyle="#ff4b4b";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(0,crashY);
+    ctx.lineTo(canvas.width,crashY);
+    ctx.stroke();
+  }
+  
   // Plane trail
   plane.trail.forEach(p=>{
     ctx.fillStyle="rgba(0,255,255,0.3)";
@@ -116,10 +128,10 @@ function drawScene(){
   ctx.restore();
   
   // Bet markers
-  let scaleX = 5;
+  let scaleX=5;
   if(userBet.amount>0){
-    let x = graphData.length*scaleX;
-    let y = canvas.height-50 - Math.min(multiplier,userBet.multiplier)*50;
+    let x=graphData.length*scaleX;
+    let y=canvas.height-50 - Math.min(multiplier,userBet.multiplier)*50;
     ctx.fillStyle="#f1c40f";
     ctx.beginPath();
     ctx.arc(x,y,8,0,Math.PI*2);
@@ -127,8 +139,8 @@ function drawScene(){
   }
   botUsers.forEach(b=>{
     if(!b.cashedOut){
-      let x = graphData.length*scaleX;
-      let y = canvas.height-50 - Math.min(multiplier,b.multiplier)*50;
+      let x=graphData.length*scaleX;
+      let y=canvas.height-50 - Math.min(multiplier,b.multiplier)*50;
       ctx.fillStyle="rgba(255,0,0,0.7)";
       ctx.beginPath();
       ctx.arc(x,y,6,0,Math.PI*2);
@@ -138,7 +150,7 @@ function drawScene(){
   
   // Particles
   for(let i=0;i<particles.length;i++){
-    let p = particles[i];
+    let p=particles[i];
     ctx.fillStyle="rgba(255,69,0,"+p.alpha+")";
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
@@ -170,8 +182,11 @@ function updateParticles(){
 // -------- Start Game --------
 function startGame(){
   if(running) return;
-  let amt = parseInt(document.getElementById('betAmount').value);
-  let mul = parseFloat(document.getElementById('betMultiplier').value);
+  
+  startSound.play();
+  
+  let amt=parseInt(document.getElementById('betAmount').value);
+  let mul=parseFloat(document.getElementById('betMultiplier').value);
   if(amt>coins){alert("Not enough coins"); return;}
   userBet={amount:amt,multiplier:mul,cashedOut:false,won:0};
   coins-=amt; updateCoins();
