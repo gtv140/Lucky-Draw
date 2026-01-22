@@ -139,11 +139,27 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 </div>
 </section>
 
+<!-- ✅ Updated Contact Section -->
 <section id="contact">
 <h2>📞 Contact & Support</h2>
 <p>Email: <a href="mailto:rock.earn92@gmail.com">rock.earn92@gmail.com</a></p>
 <p>WhatsApp: <a href="https://wa.me/03705519562">03705519562</a></p>
-<img src="https://picsum.photos/800/300?random=13" alt="Contact Us">
+
+<form action="https://formspree.io/f/yourformid" method="POST" style="margin-top:15px;">
+  <input type="text" name="name" placeholder="Your Name" required style="padding:10px;width:100%;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;">
+  <input type="email" name="email" placeholder="Your Email" required style="padding:10px;width:100%;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;">
+  <textarea name="message" placeholder="Your Message" required style="padding:10px;width:100%;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;"></textarea>
+  <button type="submit" class="btn">Send Message</button>
+</form>
+
+<p style="margin-top:15px;font-weight:bold;font-size:16px;">Start Your Project Today → Contact Me on WhatsApp!</p>
+
+<div style="margin-top:15px;">
+  <a href="https://www.facebook.com/profile.php?id=100084218946114" target="_blank" class="btn" style="background:#3b5998;">Facebook</a>
+  <a href="https://www.instagram.com/mr_nazim073?igsh=MXd4d2hmcWNvNjVsdQ==" target="_blank" class="btn" style="background:#E1306C;">Instagram</a>
+</div>
+
+<img src="https://picsum.photos/800/300?random=14" alt="Contact Us" style="margin-top:15px;border-radius:10px;">
 </section>
 
 <section>
