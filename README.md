@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,12 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* Basic Reset */
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Roboto',sans-serif;background:#f4f6f9;color:#222;transition:background 0.3s,color 0.3s;}
 a{text-decoration:none;}
-
-/* Header */
 header{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;padding:80px 20px;text-align:center;position:relative;overflow:hidden;}
 header h1{font-size:48px;margin-bottom:15px;}
 header p{font-size:20px;opacity:0.9;margin-bottom:20px;}
@@ -24,12 +20,10 @@ header .cta-btn:hover{background:#128C7E;}
 header .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,0.1),transparent);animation:rotate 20s linear infinite;z-index:0;}
 @keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
-/* Nav */
 nav{background:#111;padding:12px;text-align:center;position:sticky;top:0;z-index:1000;}
 nav a{color:#fff;margin:0 12px;font-weight:bold;font-size:14px;transition:0.3s;}
 nav a:hover{color:#25D366;}
 
-/* Sections */
 section{background:#fff;margin:25px auto;padding:30px;max-width:1000px;border-radius:12px;box-shadow:0 6px 15px rgba(0,0,0,0.08);}
 h2{text-align:center;margin-bottom:20px;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
@@ -39,34 +33,25 @@ h2{text-align:center;margin-bottom:20px;}
 .btn{display:inline-block;margin-top:15px;padding:12px 22px;background:#25D366;color:#fff;border-radius:6px;font-weight:bold;transition:0.3s;}
 .btn:hover{background:#128C7E;}
 
-/* Testimonials */
 .testimonial{background:#f1f5f9;padding:20px;border-radius:10px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
 .testimonial img{width:60px;height:60px;border-radius:50%;margin-bottom:10px;}
 .testimonial p{font-style:italic;}
 
-/* FAQ Accordion */
 .accordion{border-radius:8px;border:1px solid #ccc;overflow:hidden;margin-bottom:10px;}
 .accordion button{background:#25D366;color:#fff;padding:15px;width:100%;border:none;text-align:left;cursor:pointer;font-weight:bold;transition:0.3s;}
 .accordion button:hover{background:#128C7E;}
 .accordion .panel{padding:15px;background:#f9fafb;display:none;}
 
-/* Newsletter */
 .newsletter input[type=email]{padding:12px;width:70%;border-radius:5px;border:1px solid #ccc;}
 .newsletter button{padding:12px 20px;border:none;background:#25D366;color:#fff;border-radius:5px;font-weight:bold;transition:0.3s;}
 .newsletter button:hover{background:#128C7E;}
 
-/* Floating WhatsApp */
 .floating-whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:15px;border-radius:50%;font-size:20px;text-align:center;cursor:pointer;z-index:1000;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
 .floating-whatsapp:hover{background:#128C7E;}
 
-/* Footer */
 footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;}
-
-/* Scroll Button */
 #scrollBtn{position:fixed;bottom:90px;right:20px;background:#25D366;color:#fff;padding:12px 15px;border:none;border-radius:50%;cursor:pointer;display:none;font-size:18px;z-index:999;}
 #scrollBtn:hover{background:#128C7E;}
-
-/* Dark Mode */
 .dark-mode{background:#121212;color:#e0e0e0;}
 .dark-mode header{background:linear-gradient(135deg,#2c3e50,#34495e,#1c1c1c);}
 .dark-mode nav{background:#222;}
@@ -92,6 +77,7 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <a href="#testimonials">Testimonials</a>
 <a href="#faq">FAQ</a>
 <a href="#contact">Contact</a>
+<a href="#payments">Payments</a>
 </nav>
 
 <section id="about">
@@ -167,7 +153,6 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 
 <section id="faq">
 <h2>❓ FAQ</h2>
-
 <div class="accordion">
 <button onclick="toggleAccordion(this)">How long before I earn?</button>
 <div class="panel"><p>Depends on your traffic & effort, usually 1-2 weeks for initial earnings.</p></div>
@@ -180,7 +165,6 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <button onclick="toggleAccordion(this)">Is this free or paid?</button>
 <div class="panel"><p>Basic resources are free. Optional services / packages are paid.</p></div>
 </div>
-
 </section>
 
 <section id="newsletter">
@@ -197,18 +181,70 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <div class="card">
 <h3>Starter</h3>
 <p>$10 – Basic guide & 1 service consultation</p>
-<a class="btn" href="https://wa.me/03705519562">Buy Now</a>
+<a class="btn" href="https://wa.me/03705519562?text=I%20want%20to%20buy%20the%20Starter%20package">Buy Now</a>
 </div>
 <div class="card">
 <h3>Pro</h3>
 <p>$30 – Complete earning guide + 3 services</p>
-<a class="btn" href="https://wa.me/03705519562">Buy Now</a>
+<a class="btn" href="https://wa.me/03705519562?text=I%20want%20to%20buy%20the%20Pro%20package">Buy Now</a>
 </div>
 <div class="card">
 <h3>Premium</h3>
 <p>$50 – Full resources + lifetime support</p>
-<a class="btn" href="https://wa.me/03705519562">Buy Now</a>
+<a class="btn" href="https://wa.me/03705519562?text=I%20want%20to%20buy%20the%20Premium%20package">Buy Now</a>
 </div>
+</div>
+</section>
+
+<section id="payments">
+<h2>💳 Payment Options & Confirmation</h2>
+<div class="grid">
+
+<!-- Binance -->
+<div class="card">
+<h3>Binance / Crypto</h3>
+<p>Send payment directly to our wallet:</p>
+<p><strong>0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F</strong></p>
+<a class="btn" href="https://www.binance.com/en/pay?recipient=0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F" target="_blank">Pay with Binance</a>
+</div>
+
+<!-- JazzCash -->
+<div class="card">
+<h3>JazzCash</h3>
+<p>Send payment via JazzCash:</p>
+<p><strong>03705519562</strong></p>
+<a class="btn" href="https://wa.me/03705519562?text=I%20have%20sent%20payment%20via%20JazzCash" target="_blank">Confirm on WhatsApp</a>
+</div>
+
+<!-- EasyPaisa -->
+<div class="card">
+<h3>EasyPaisa</h3>
+<p>Send payment via EasyPaisa:</p>
+<p><strong>03379827882</strong></p>
+<a class="btn" href="https://wa.me/03379827882?text=I%20have%20sent%20payment%20via%20EasyPaisa" target="_blank">Confirm on WhatsApp</a>
+</div>
+
+<!-- Instagram -->
+<div class="card">
+<h3>Instagram</h3>
+<p>DM us for payment confirmation</p>
+<a class="btn" href="https://instagram.com/mr_nazim073" target="_blank">Send DM</a>
+</div>
+
+<!-- Facebook -->
+<div class="card">
+<h3>Facebook</h3>
+<p>Send us a message to confirm your payment</p>
+<a class="btn" href="https://www.facebook.com/profile.php?id=100084218946114" target="_blank">Send Message</a>
+</div>
+
+<!-- Gmail -->
+<div class="card">
+<h3>Email Confirmation</h3>
+<p>Send payment details via Gmail</p>
+<a class="btn" href="mailto:rock.earn92@gmail.com">Send Email</a>
+</div>
+
 </div>
 </section>
 
@@ -223,11 +259,6 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 
 <p>Or Contact Directly on WhatsApp!</p>
 <a href="https://wa.me/03705519562" class="btn">WhatsApp</a>
-
-<div style="margin-top:15px;">
-<a href="https://www.facebook.com/profile.php?id=100084218946114" target="_blank" class="btn" style="background:#3b5998;">Facebook</a>
-<a href="https://www.instagram.com/mr_nazim073?igsh=MXd4d2hmcWNvNjVsdQ==" target="_blank" class="btn" style="background:#E1306C;">Instagram</a>
-</div>
 </section>
 
 <footer>
