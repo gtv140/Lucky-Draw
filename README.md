@@ -27,6 +27,7 @@ input[type=file]{padding:5px;}
 #timerDisplay{font-weight:bold;font-size:18px;margin-top:10px;text-align:center;color:#d9534f;}
 #downloadBtn{background:#007bff;display:block;margin:15px auto;text-align:center;pointer-events:none;opacity:0.5;}
 #downloadBtn.active{pointer-events:auto;opacity:1;}
+iframe{width:100%;height:500px;border:1px solid #ccc;border-radius:8px;margin-top:15px;}
 </style>
 </head>
 
@@ -119,11 +120,14 @@ input[type=file]{padding:5px;}
 <input type="file" id="paymentProof" accept="image/*">
 <p id="timerDisplay">Timer: 00:00</p>
 <a href="SkillMint_Course.pdf" id="downloadBtn" download>Download Course</a>
+
+<h3>Preview of Course (PDF)</h3>
+<iframe src="SkillMint_Course.pdf"></iframe>
 </section>
 
 <script>
 // Countdown Timer with Local Storage
-let timerDuration = 5*60; // 5 minutes in seconds (change to 10*60 for 10 min)
+let timerDuration = 5*60; // 5 minutes in seconds
 let timerDisplay = document.getElementById('timerDisplay');
 let downloadBtn = document.getElementById('downloadBtn');
 
