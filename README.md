@@ -7,7 +7,7 @@
 
 <style>
 *{box-sizing:border-box;}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#222;}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#222;transition:background 0.3s, color 0.3s;}
 header{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;padding:50px 20px;text-align:center;}
 header h1{margin:0;font-size:42px;}
 header p{margin-top:10px;font-size:18px;opacity:0.9;}
@@ -23,6 +23,12 @@ h2{margin-top:0;}
 footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;}
 @media(max-width:600px){nav a{display:block;margin:8px 0;}}
 .ads-placeholder{background:#eee;color:#555;text-align:center;padding:15px;border-radius:8px;margin-top:10px;}
+#scrollBtn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:12px 15px;border:none;border-radius:50%;cursor:pointer;display:none;font-size:18px;z-index:999;}
+.dark-mode{background:#121212;color:#e0e0e0;}
+.dark-mode header{background:linear-gradient(135deg,#2c3e50,#34495e,#1c1c1c);}
+.dark-mode nav{background:#222;}
+.dark-mode section{background:#1e1e1e;color:#e0e0e0;box-shadow:0 6px 15px rgba(0,0,0,0.3);}
+.dark-mode .card{background:#2a2a2a;border:1px solid #555;}
 </style>
 </head>
 
@@ -31,6 +37,7 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <header>
 <h1>SkillMint Pro</h1>
 <p>Learn Skills. Build Online Income.</p>
+<button onclick="toggleDarkMode()" style="margin-top:15px;padding:10px 15px;border:none;border-radius:5px;cursor:pointer;">Toggle Dark Mode</button>
 </header>
 
 <nav>
@@ -38,12 +45,13 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <a href="#earn">Earning</a>
 <a href="#services">Services</a>
 <a href="#affiliate">Affiliate</a>
+<a href="#blog">Blog</a>
 <a href="#contact">Contact</a>
 </nav>
 
 <section id="about">
 <h2>About SkillMint Pro</h2>
-<p>SkillMint Pro is your digital learning & earning hub. Learn practical online skills and turn them into real income with AdSense, affiliate marketing, and digital services. 100% beginner-friendly.</p>
+<p>SkillMint Pro is your digital learning & earning hub. Learn practical online skills and turn them into real income with AdSense, affiliate marketing, and digital services. Beginner-friendly and future-ready.</p>
 </section>
 
 <section id="earn">
@@ -62,7 +70,7 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <div class="card">
 <h3>Digital Services</h3>
 <p>Offer services like website setup, YouTube SEO, thumbnails & logo design.</p>
-<a class="btn" href="https://wa.me/923000000000">Contact on WhatsApp</a>
+<a class="btn" href="https://wa.me/03705519562">Contact on WhatsApp</a>
 </div>
 </div>
 </section>
@@ -75,7 +83,7 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <li>Thumbnail & Logo Design</li>
 <li>Affiliate Website Creation</li>
 </ul>
-<a class="btn" href="https://wa.me/923000000000">Contact on WhatsApp</a>
+<a class="btn" href="https://wa.me/03705519562">Contact on WhatsApp</a>
 </section>
 
 <section id="affiliate">
@@ -84,10 +92,15 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <a class="btn" href="#">Visit Affiliate Offer</a>
 </section>
 
+<section id="blog">
+<h2>📝 Blog & Updates</h2>
+<p>This section will host small guides, news, or updates to drive traffic and support AdSense earnings.</p>
+</section>
+
 <section id="contact">
 <h2>📞 Contact & Support</h2>
-<p>Email: support@skillmint.co</p>
-<p>WhatsApp: +92 300 0000000</p>
+<p>Email: <a href="mailto:rock.earn92@gmail.com">rock.earn92@gmail.com</a></p>
+<p>WhatsApp: <a href="https://wa.me/03705519562">03705519562</a></p>
 </section>
 
 <section>
@@ -97,8 +110,33 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 </section>
 
 <footer>
-<p>© 2026 SkillMint Pro. All Rights Reserved.</p>
+<p>© <span id="year"></span> SkillMint Pro. All Rights Reserved.</p>
 </footer>
+
+<button id="scrollBtn" onclick="scrollToTop()">↑</button>
+
+<script>
+// Dark Mode Toggle
+function toggleDarkMode(){
+  document.body.classList.toggle("dark-mode");
+}
+
+// Scroll-to-top button
+const scrollBtn = document.getElementById("scrollBtn");
+window.onscroll = function(){
+  if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
+    scrollBtn.style.display="block";
+  } else {
+    scrollBtn.style.display="none";
+  }
+};
+function scrollToTop(){
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Dynamic Year in Footer
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
