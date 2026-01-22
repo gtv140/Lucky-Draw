@@ -18,6 +18,7 @@ h2{margin-top:0;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
 .card{background:#f9fafb;padding:20px;border-radius:10px;border:1px solid #e5e7eb;transition:transform 0.3s ease;}
 .card:hover{transform:translateY(-5px);}
+.card img{width:100%;border-radius:8px;margin-bottom:10px;}
 .btn{display:inline-block;margin-top:15px;padding:12px 22px;background:#25D366;color:#fff;text-decoration:none;border-radius:6px;font-weight:bold;font-size:14px;transition:background 0.3s;}
 .btn:hover{background:#128C7E;}
 footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;}
@@ -58,22 +59,26 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <section id="about">
 <h2>About SkillMint Pro</h2>
 <p>SkillMint Pro is your digital learning & earning hub. Learn practical online skills and turn them into real income with AdSense, affiliate marketing, and digital services. Beginner-friendly and future-ready.</p>
+<img src="https://picsum.photos/800/300?random=1" alt="About SkillMint Pro">
 </section>
 
 <section id="earn">
 <h2>💰 How You Can Earn</h2>
 <div class="grid">
 <div class="card">
+<img src="https://picsum.photos/400/250?random=2" alt="AdSense">
 <h3>Google AdSense</h3>
 <p>Monetize your content by displaying Google ads. Drive traffic and earn passive income.</p>
 <div class="ads-placeholder">AdSense Placeholder</div>
 </div>
 <div class="card">
+<img src="https://picsum.photos/400/250?random=3" alt="Affiliate">
 <h3>Affiliate Marketing</h3>
 <p>Promote products & tools and earn commission for every sale.</p>
 <a class="btn" href="#">Visit Affiliate Offer</a>
 </div>
 <div class="card">
+<img src="https://picsum.photos/400/250?random=4" alt="Digital Services">
 <h3>Digital Services</h3>
 <p>Offer services like website setup, YouTube SEO, thumbnails & logo design.</p>
 <a class="btn" href="https://wa.me/03705519562">Contact on WhatsApp</a>
@@ -83,30 +88,62 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 
 <section id="services">
 <h2>🛠 Services We Offer</h2>
-<ul>
-<li>Website Design & GitHub Pages Setup</li>
-<li>YouTube SEO & Channel Growth</li>
-<li>Thumbnail & Logo Design</li>
-<li>Affiliate Website Creation</li>
-</ul>
+<div class="grid">
+<div class="card">
+<img src="https://picsum.photos/400/250?random=5" alt="Service 1">
+<p>Website Design & GitHub Pages Setup</p>
+</div>
+<div class="card">
+<img src="https://picsum.photos/400/250?random=6" alt="Service 2">
+<p>YouTube SEO & Channel Growth</p>
+</div>
+<div class="card">
+<img src="https://picsum.photos/400/250?random=7" alt="Service 3">
+<p>Thumbnail & Logo Design</p>
+</div>
+<div class="card">
+<img src="https://picsum.photos/400/250?random=8" alt="Service 4">
+<p>Affiliate Website Creation</p>
+</div>
+</div>
 <a class="btn" href="https://wa.me/03705519562">Contact on WhatsApp</a>
 </section>
 
 <section id="affiliate">
 <h2>🔥 Recommended Tools & Affiliate Offers</h2>
-<p>Check trusted tools for online earning. Using our links may earn a small commission at no extra cost to you.</p>
+<div class="grid">
+<div class="card">
+<img src="https://picsum.photos/400/250?random=9" alt="Affiliate Tool">
+<p>Promote trusted tools for earning online. Small commission possible.</p>
 <a class="btn" href="#">Visit Affiliate Offer</a>
+</div>
+<div class="card">
+<img src="https://picsum.photos/400/250?random=10" alt="Affiliate Tool">
+<p>Promote more products & services. Monetize your traffic.</p>
+<a class="btn" href="#">Visit Affiliate Offer</a>
+</div>
+</div>
 </section>
 
 <section id="blog">
 <h2>📝 Blog & Updates</h2>
-<p>This section will host small guides, news, or updates to drive traffic and support AdSense earnings.</p>
+<div class="grid">
+<div class="card">
+<img src="https://picsum.photos/400/250?random=11" alt="Blog 1">
+<p>Step by step earning guide for beginners in digital marketing.</p>
+</div>
+<div class="card">
+<img src="https://picsum.photos/400/250?random=12" alt="Blog 2">
+<p>Top affiliate programs to start monetizing your website today.</p>
+</div>
+</div>
 </section>
 
 <section id="contact">
 <h2>📞 Contact & Support</h2>
 <p>Email: <a href="mailto:rock.earn92@gmail.com">rock.earn92@gmail.com</a></p>
 <p>WhatsApp: <a href="https://wa.me/03705519562">03705519562</a></p>
+<img src="https://picsum.photos/800/300?random=13" alt="Contact Us">
 </section>
 
 <section>
@@ -140,21 +177,11 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 </div>
 
 <script>
-// Dark Mode Toggle
 function toggleDarkMode(){document.body.classList.toggle("dark-mode");}
-
-// Scroll-to-top button
 const scrollBtn=document.getElementById("scrollBtn");
-window.onscroll=function(){
-  if(document.body.scrollTop>200||document.documentElement.scrollTop>200){scrollBtn.style.display="block";}
-  else{scrollBtn.style.display="none";}
-};
+window.onscroll=function(){scrollBtn.style.display=(document.body.scrollTop>200||document.documentElement.scrollTop>200)?'block':'none';};
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
-
-// Dynamic Year in Footer
 document.getElementById("year").textContent=new Date().getFullYear();
-
-// Earning Guide Popup
 function openGuide(){document.getElementById("earningGuide").style.display="block";}
 function closeGuide(){document.getElementById("earningGuide").style.display="none";}
 </script>
