@@ -29,7 +29,6 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 .dark-mode nav{background:#222;}
 .dark-mode section{background:#1e1e1e;color:#e0e0e0;box-shadow:0 6px 15px rgba(0,0,0,0.3);}
 .dark-mode .card{background:#2a2a2a;border:1px solid #555;}
-/* Popup Guide */
 #earningGuide {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);color:#fff;overflow-y:auto;z-index:9999;padding:20px;}
 #earningGuide .guide-content{max-width:800px;margin:50px auto;background:#222;border-radius:12px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 #earningGuide h2{color:#25D366;}
@@ -125,17 +124,16 @@ footer{background:#111;color:#fff;text-align:center;padding:20px;font-size:14px;
 <!-- Interactive Earning Guide Popup -->
 <div id="earningGuide">
 <div class="guide-content">
-<h2>🔥 First Week Earning Boost Guide</h2>
+<h2>🔥 First Week Earning Boost Checklist</h2>
 <p>Follow these steps to maximize early earning:</p>
 <ul>
-<li><strong>GitHub Pages Live:</strong> Ensure your website link is live.</li>
-<li><strong>AdSense:</strong> Apply & integrate code in placeholder divs.</li>
-<li><strong>Affiliate Links:</strong> Replace buttons with high-converting affiliate URLs.</li>
-<li><strong>WhatsApp Services:</strong> Offer small services, respond quickly to clients.</li>
-<li><strong>Traffic:</strong> Share link on social media, WhatsApp, Quora, Reddit.</li>
-<li><strong>Blog Updates:</strong> Post small guides/news to support AdSense & SEO.</li>
-<li><strong>Consistency:</strong> Daily updates, check analytics, optimize buttons.</li>
-<li><strong>Track & Improve:</strong> Optimize clicks, update content for better conversion.</li>
+<li>Day 1: Setup & Launch – Confirm GitHub Pages link live, upload HTML, test buttons.</li>
+<li>Day 2: AdSense Setup – Apply & integrate code in placeholders, update SEO.</li>
+<li>Day 3: Affiliate Setup – Replace buttons with affiliate links, short URLs & CTA.</li>
+<li>Day 4: WhatsApp Services – Offer small services, respond fast.</li>
+<li>Day 5: Traffic Push – Share link on social media, Quora, Reddit.</li>
+<li>Day 6: Blog Updates – Post small guides with affiliate + ads.</li>
+<li>Day 7: Review & Optimize – Check clicks, analytics, improve buttons.</li>
 </ul>
 <button onclick="closeGuide()">Close Guide</button>
 </div>
