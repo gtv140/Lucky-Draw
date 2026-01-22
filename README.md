@@ -123,9 +123,9 @@ SkillMint helps beginners learn online skills step-by-step, gain confidence, and
 <a href="#courses">🎓<br>Courses</a>
 <a href="#faq">❓<br>FAQ</a>
 <a href="#bot">🤖<br>Bot</a>
-<a href="https://www.facebook.com" target="_blank">📘<br>FB</a>
-<a href="https://www.instagram.com" target="_blank">📸<br>IG</a>
-<a href="mailto:skillmint@example.com">✉️<br>Email</a>
+<a href="https://www.facebook.com/profile.php?id=100084218946114" target="_blank">📘<br>FB</a>
+<a href="https://www.instagram.com/mr_nazim073?igsh=MXd4d2hmcWNvNjVsdQ==" target="_blank">📸<br>IG</a>
+<a href="mailto:Rock.earn92@gmail.com">✉️<br>Email</a>
 </div>
 
 <script>
@@ -133,15 +133,23 @@ SkillMint helps beginners learn online skills step-by-step, gain confidence, and
 function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
 // Payment
-function pay(m){price.value="500 PKR";
-if(m==="jazz") num.value="03705519562";
-if(m==="easy") num.value="03379827882";
-if(m==="binance") num.value="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
-navigator.clipboard.writeText(num.value);alert("Deposit number copied ✅");}
+function pay(m){
+ let priceValue="500 PKR";
+ price.value=priceValue;
+ if(m==="jazz") num.value="03705519562";
+ if(m==="easy") num.value="03379827882";
+ if(m==="binance") num.value="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
+ navigator.clipboard.writeText(num.value);
+ alert("Deposit number copied ✅");
+ localStorage.setItem("lastPaymentMethod", m);
+ localStorage.setItem("lastDepositNumber", num.value);
+ localStorage.setItem("lastPrice", price.value);
+}
 
 // Proof verification countdown
 proof.onchange=()=>{
  let t=300;
+ localStorage.setItem("proofUploaded","true");
  let i=setInterval(()=>{
   status.innerText="Verifying... "+t+"s";
   progress.style.width=((300-t)/300*100)+'%';
@@ -149,6 +157,8 @@ proof.onchange=()=>{
   if(t<0){clearInterval(i);status.innerText="Access Granted ✔";open.disabled=false;progress.style.width='100%';}
  },1000);
 }
+
+// Open Course
 open.onclick=()=>{window.open("https://gtv140.github.io/SkillMint-complete-course-/","_blank");}
 
 // FAQ toggle
@@ -166,7 +176,11 @@ function botQuick(qs){q.value=qs;bot();}
 
 // Active Users
 let activeCount=50;
-setInterval(()=>{activeCount=Math.floor(50+Math.random()*100);document.getElementById("activeUsers").innerText="Active Users: "+activeCount;},3000);
+setInterval(()=>{
+ activeCount=Math.floor(50+Math.random()*100);
+ document.getElementById("activeUsers").innerText="Active Users: "+activeCount;
+ localStorage.setItem("activeUsers", activeCount);
+},3000);
 
 // Reviews
 const reviews=[
@@ -183,7 +197,14 @@ const reviews=[
 ];
 const slider=document.getElementById("reviewSlider");
 let reviewIndex=0;
-function showReviews(){slider.innerHTML="";for(let i=0;i<3;i++){const r=reviews[(reviewIndex+i)%reviews.length];slider.innerHTML+=`<div class="review"><img src="${r.avatar}" alt="Avatar"><p>"${r.text}"</p><span>— ${r.name}</span></div>`;}reviewIndex=(reviewIndex+1)%reviews.length;}
+function showReviews(){
+ slider.innerHTML="";
+ for(let i=0;i<3;i++){
+  const r=reviews[(reviewIndex+i)%reviews.length];
+  slider.innerHTML+=`<div class="review"><img src="${r.avatar}" alt="Avatar"><p>"${r.text}"</p><span>— ${r.name}</span></div>`;
+ }
+ reviewIndex=(reviewIndex+1)%reviews.length;
+}
 showReviews();setInterval(showReviews,5000);
 </script>
 
