@@ -1,185 +1,139 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SkillMint – Learn Skills & Earn Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+<title>SkillMint</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Roboto',sans-serif;background:#f4f6f9;color:#222;}
-header{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:#fff;padding:60px 20px;text-align:center;}
-header h1{font-size:48px;margin-bottom:10px;}
-header p{font-size:20px;margin-bottom:20px;}
-header .cta-btn{padding:12px 25px;background:#25D366;color:#fff;border-radius:6px;font-weight:bold;}
-nav{background:#111;padding:12px;text-align:center;}
-nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold;}
-nav a:hover{color:#25D366;}
-section{background:#fff;margin:25px auto;padding:25px;border-radius:12px;max-width:1000px;box-shadow:0 6px 15px rgba(0,0,0,0.08);}
-h2{text-align:center;margin-bottom:15px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.card{background:#f9fafb;padding:20px;border-radius:10px;border:1px solid #e5e7eb;transition:transform 0.3s;}
-.card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,0.2);}
-.btn{display:inline-block;margin-top:10px;padding:10px 18px;background:#25D366;color:#fff;border-radius:6px;font-weight:bold;transition:0.3s;}
-.btn:hover{background:#128C7E;}
-input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:6px;border:1px solid #ccc;}
-input[type=file]{padding:5px;}
-#timerDisplay{font-weight:bold;font-size:18px;margin-top:10px;text-align:center;color:#d9534f;}
-#downloadBtn{background:#007bff;display:block;margin:15px auto;text-align:center;pointer-events:none;opacity:0.5;}
-#downloadBtn.active{pointer-events:auto;opacity:1;}
-iframe{width:100%;height:500px;border:1px solid #ccc;border-radius:8px;margin-top:15px;}
+body { margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#eef2f7;}
+header { background: linear-gradient(90deg, #0d47a1, #1565c0); color:white; padding:25px 0; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+header h1 { margin:0; font-size:32px; letter-spacing:1px;}
+header p { margin:5px 0 0; font-size:16px;}
+.hero { text-align:center; padding:40px 20px; background:#bbdefb; color:#0d47a1; border-bottom:5px solid #0d47a1;}
+.hero h2 { font-size:28px; margin-bottom:15px;}
+.hero p { font-size:16px; max-width:700px; margin:auto;}
+.section {text-align:center; padding:40px 20px; max-width:750px; margin:40px auto; background:#f0f4f8; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+.section h2 { color:#0d47a1; margin-bottom:15px;}
+.section p { color:#555; font-size:15px;}
+.course-section { background:#e3f2fd;}
+.card-container { display:flex; flex-wrap:wrap; justify-content:center; margin-top:30px;}
+.card { background:white; border-radius:12px; padding:20px; margin:10px; width:200px; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition:0.3s;}
+.card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.2);}
+.card h3 { color:#0d47a1; margin-bottom:10px;}
+.card p { font-size:14px; color:#555;}
+button.payBtn { padding:12px 25px; margin:5px; border:none; border-radius:8px; color:white; cursor:pointer; font-size:16px; transition:0.3s;}
+button.payBtn:hover { transform: scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+#openCourse { padding:15px 50px; margin-top:20px; font-size:18px; border:none; border-radius:10px; background:#0d47a1; color:white; cursor:pointer; transition:0.3s;}
+#openCourse:hover { transform: scale(1.05); box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+input[type=file], input[type=text] { padding:12px; width:300px; border-radius:8px; border:1px solid #ccc; margin-top:10px; text-align:center;}
+footer { background:#0d47a1; color:white; padding:20px 0; text-align:center; margin-top:40px;}
+@media(max-width:700px){ .card-container{ flex-direction:column; align-items:center;} input[type=file], input[type=text]{width:80%;} }
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>SkillMint</h1>
-<p>Learn Skills & Build Your Online Income</p>
-<a href="#payments" class="cta-btn">Start Earning</a>
+  <h1>SkillMint</h1>
+  <p>Learn, Earn & Grow – Step by step for beginners</p>
 </header>
 
-<nav>
-<a href="#about">About</a>
-<a href="#earn">Earn</a>
-<a href="#payments">Payments</a>
-<a href="#course">Course</a>
-</nav>
-
-<section id="about">
-<h2>About SkillMint</h2>
-<p>SkillMint helps beginners learn digital skills & start earning online through AdSense, affiliate marketing, freelancing & digital services.</p>
-</section>
-
-<section id="earn">
-<h2>💰 How You Can Earn</h2>
-<div class="grid">
-<div class="card">
-<h3>Google AdSense</h3>
-<p>Monetize your content & earn passive income.</p>
-<a class="btn" href="#">Learn More</a>
-</div>
-<div class="card">
-<h3>Affiliate Marketing</h3>
-<p>Promote products & earn commission.</p>
-<a class="btn" href="#">Visit Offer</a>
-</div>
-<div class="card">
-<h3>Digital Services</h3>
-<p>Offer services like website setup, YouTube SEO, logos, thumbnails.</p>
-<a class="btn" href="https://wa.me/03705519562">Contact on WhatsApp</a>
-</div>
-</div>
-</section>
-
-<section id="payments">
-<h2>💳 Payment Options</h2>
-<div class="grid">
-
-<div class="card">
-<h3>Binance / Crypto</h3>
-<p>Send payment directly to our wallet:</p>
-<p><strong>0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F</strong></p>
-<button class="btn" onclick="payBinance()">Pay with Binance</button>
+<div class="hero">
+  <h2>Welcome to SkillMint</h2>
+  <p>Master YouTube, Freelancing, Affiliate Marketing, Website Setup & Social Media Marketing with step-by-step guidance and practical examples. Beginner-friendly for everyone!</p>
 </div>
 
-<div class="card">
-<h3>JazzCash</h3>
-<p>Send payment via JazzCash: <strong>03705519562</strong></p>
-<button class="btn" onclick="payJazzCash()">Pay with JazzCash</button>
+<div class="section course-section">
+  <h2>🎓 Buy SkillMint Complete Course</h2>
+  <p><strong>Price:</strong> <span id="priceDisplay">--</span></p>
+
+  <h3>Select Payment Method:</h3>
+  <div>
+    <button onclick="setMethod('JazzCash')" class="payBtn" style="background:#2e7d32;">JazzCash</button>
+    <button onclick="setMethod('EasyPaisa')" class="payBtn" style="background:#f9a825;">EasyPaisa</button>
+    <button onclick="setMethod('Binance')" class="payBtn" style="background:#f3ba2f;">Binance</button>
+  </div>
+
+  <h3>Payment Details:</h3>
+  <input type="text" id="depositNumber" placeholder="Deposit Number will auto-fill"><br><br>
+
+  <h3>Upload Payment Proof:</h3>
+  <input type="file" id="proof" accept="image/*"><br><br>
+
+  <p>Send screenshot via: 
+    <a href="mailto:example@example.com">Email</a> | 
+    <a href="https://wa.me/03379827882" target="_blank">WhatsApp</a> | 
+    <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a> | 
+    <a href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
+  </p>
+
+  <div id="timer" style="margin-top:20px; font-size:18px; color:#e65100;"></div>
+  <button id="openCourse" disabled>Open Course</button>
 </div>
 
-<div class="card">
-<h3>EasyPaisa</h3>
-<p>Send payment via EasyPaisa: <strong>03379827882</strong></p>
-<button class="btn" onclick="payEasyPaisa()">Pay with EasyPaisa</button>
+<div class="section">
+  <h2>How SkillMint Helps You</h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>Learn Skills</h3>
+      <p>Master YouTube, Freelancing, Affiliate Marketing, Social Media & more from scratch.</p>
+    </div>
+    <div class="card">
+      <h3>Step by Step</h3>
+      <p>Beginner-friendly tutorials with practical examples and exercises.</p>
+    </div>
+    <div class="card">
+      <h3>Earn Online</h3>
+      <p>Apply your skills to start freelancing, monetize YouTube & affiliate marketing.</p>
+    </div>
+    <div class="card">
+      <h3>Guidance & Support</h3>
+      <p>Clear instructions, proof verification, and real-time course access.</p>
+    </div>
+  </div>
 </div>
 
-<div class="card">
-<h3>Instagram</h3>
-<a class="btn" href="https://instagram.com/mr_nazim073" target="_blank">Send DM</a>
-</div>
-
-<div class="card">
-<h3>Facebook</h3>
-<a class="btn" href="https://www.facebook.com/profile.php?id=100084218946114" target="_blank">Send Message</a>
-</div>
-
-<div class="card">
-<h3>Email Confirmation</h3>
-<a class="btn" href="mailto:rock.earn92@gmail.com">Send Email</a>
-</div>
-
-</div>
-</section>
-
-<section id="course">
-<h2>📚 Course Access</h2>
-<p>Upload your payment screenshot below. Timer will start once you upload. After timer ends, you can download the course.</p>
-
-<input type="file" id="paymentProof" accept="image/*">
-<p id="timerDisplay">Timer: 00:00</p>
-<a href="SkillMint_Course.pdf" id="downloadBtn" download>Download Course</a>
-
-<h3>Preview of Course (PDF)</h3>
-<iframe src="SkillMint_Course.pdf"></iframe>
-</section>
+<footer>
+  <p>Contact us: Email | WhatsApp | Facebook | Instagram</p>
+  <p>© 2026 SkillMint</p>
+</footer>
 
 <script>
-// Payment buttons auto-copy + app open
-function payJazzCash(){
-  navigator.clipboard.writeText("03705519562");
-  alert("JazzCash number copied. Open app and paste.");
-  window.location.href = "intent://#Intent;scheme=jazzcash;package=com.techlogix.mobilinkcustomer;end";
-}
-function payEasyPaisa(){
-  navigator.clipboard.writeText("03379827882");
-  alert("EasyPaisa number copied. Open app and paste.");
-  window.location.href = "intent://#Intent;scheme=easypaisa;package=pk.com.telenor.phoenix;end";
-}
-function payBinance(){
-  navigator.clipboard.writeText("0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F");
-  alert("Wallet address copied. Open Binance app and paste.");
-  window.location.href = "https://www.binance.com/en";
+let openBtn = document.getElementById('openCourse');
+let timerDiv = document.getElementById('timer');
+let priceDisplay = document.getElementById('priceDisplay');
+let depositField = document.getElementById('depositNumber');
+
+function setMethod(method){
+    let price = 500; 
+    let depositNum = "";
+    if(method==='JazzCash') depositNum="03705519562";
+    else if(method==='EasyPaisa') depositNum="03379827882";
+    else if(method==='Binance') depositNum="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
+
+    priceDisplay.innerText = `${price} PKR`;
+    depositField.value = depositNum;
 }
 
-// Countdown Timer with Local Storage
-let timerDuration = 5*60; // 5 min
-let timerDisplay = document.getElementById('timerDisplay');
-let downloadBtn = document.getElementById('downloadBtn');
-
-function startTimer(duration){
-    let timer = duration;
-    localStorage.setItem('timerEnd', Date.now() + timer*1000);
-    let interval = setInterval(function(){
-        let remaining = Math.floor((localStorage.getItem('timerEnd') - Date.now())/1000);
-        if(remaining <= 0){
-            clearInterval(interval);
-            timerDisplay.textContent = "✅ Timer Complete! Download Now.";
-            downloadBtn.classList.add('active');
-        } else {
-            let min = Math.floor(remaining/60);
-            let sec = remaining%60;
-            timerDisplay.textContent = `Timer: ${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-        }
-    },1000);
-}
-
-// Check if timer already running
-if(localStorage.getItem('timerEnd')){
-    let remaining = Math.floor((localStorage.getItem('timerEnd') - Date.now())/1000);
-    if(remaining>0){
-        startTimer(remaining);
-    } else {
-        downloadBtn.classList.add('active');
-        timerDisplay.textContent = "✅ Timer Complete! Download Now.";
+document.getElementById('proof').addEventListener('change', function(){
+    if(this.files.length > 0){
+        let time = 300; 
+        timerDiv.innerText = "Timer started: 05:00";
+        let countdown = setInterval(()=>{
+            let minutes = Math.floor(time/60);
+            let seconds = time%60;
+            timerDiv.innerText = `Access in: ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            time--;
+            if(time<0){
+                clearInterval(countdown);
+                timerDiv.innerText = "Payment verified! You can now access the course.";
+                openBtn.disabled = false;
+            }
+        },1000);
     }
-}
-
-// Start timer on file upload
-document.getElementById('paymentProof').addEventListener('change', function(){
-    startTimer(timerDuration);
 });
+
+openBtn.onclick = () => {
+    window.open('https://gtv140.github.io/SkillMint-complete-course-/', '_blank');
+};
 </script>
 
 </body>
