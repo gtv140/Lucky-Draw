@@ -5,23 +5,22 @@
 <title>SkillMint Pro</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#111;padding-bottom:130px;overflow-x:hidden;}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#111;padding-bottom:140px;overflow-x:hidden;}
 .header{background:linear-gradient(90deg,#2563eb,#22c55e);color:#fff;padding:25px;text-align:center;position:sticky;top:0;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.1);}
 .header h1{font-size:26px;margin:0;text-shadow:1px 1px 2px rgba(0,0,0,.3);}
-.header p{margin-top:6px;font-size:15px;opacity:.95}
-.section{padding:18px}
-.section h2{font-size:20px;margin-bottom:14px;text-align:center;animation:fadeIn 1s;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.cards{display:flex;flex-direction:column;gap:14px}
-.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.08);transition:all 0.3s;position:relative;}
+.header p{margin-top:6px;font-size:15px;opacity:.95;}
+.section{padding:18px;}
+.section h2{font-size:20px;margin-bottom:14px;text-align:center;}
+.cards{display:flex;flex-direction:column;gap:14px;}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.08);transition:all 0.3s;cursor:pointer;}
 .card:hover{transform:translateY(-6px);box-shadow:0 10px 22px rgba(0,0,0,.12);}
 .card img{width:100%;border-radius:12px;margin-bottom:10px;}
-.card h3{margin:0;font-size:17px;color:#2563eb}
+.card h3{margin:0;font-size:17px;color:#2563eb;}
 .card p{margin-top:6px;font-size:14px;color:#555;}
 .badge{display:inline-block;background:#16a34a;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px;margin-top:6px;}
 .btn{width:100%;padding:14px;border:none;border-radius:14px;font-size:15px;background:#2563eb;color:#fff;margin-top:10px;cursor:pointer;transition:0.3s;}
 .btn:hover{background:#1e40af;}
-.btn.green{background:#16a34a}
+.btn.green{background:#16a34a;}
 input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-top:6px;font-size:14px;}
 .nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:12px 0;box-shadow:0 -4px 14px rgba(0,0,0,.15);}
 .nav a{text-align:center;font-size:11px;color:#333;text-decoration:none;}
@@ -32,11 +31,15 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 .review p{font-size:14px;margin:0;display:inline;}
 .review span{font-size:13px;color:#2563eb;margin-left:6px;}
 .faq{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 4px 12px rgba(0,0,0,.06);}
-.faq h4{font-size:15px;cursor:pointer;margin:0}
+.faq h4{font-size:15px;cursor:pointer;margin:0;}
 .faq p{display:none;font-size:14px;color:#555;margin-top:6px;}
 .active-users{font-size:12px;color:#16a34a;text-align:center;margin-top:6px;font-weight:bold;}
 .progress-bar{height:8px;background:#d1d5db;border-radius:6px;margin-top:6px;}
 .progress{height:8px;background:#2563eb;width:0%;border-radius:6px;transition:width 0.5s;}
+.icons{display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+.icon-card{background:#fff;padding:12px;border-radius:14px;flex:1 0 22%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.08);cursor:pointer;transition:0.3s;}
+.icon-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.12);}
+.icon-card i{font-size:28px;color:#2563eb;margin-bottom:6px;display:block;}
 @media(min-width:768px){.cards{flex-direction:row;flex-wrap:wrap}.card{width:48%;}}
 </style>
 </head>
@@ -44,11 +47,24 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 
 <div class="header">
 <h1>SkillMint Pro</h1>
-<p>Learn skills • Earn online • Beginner friendly</p>
+<p>Learn skills, earn online & build your future</p>
 <img src="https://picsum.photos/seed/banner/1200/400" alt="Banner" style="width:100%;border-radius:12px;margin-top:10px;">
 </div>
 
 <div class="section" id="home">
+<h2>What SkillMint Offers</h2>
+<p style="text-align:center;max-width:600px;margin:0 auto 12px auto;">
+SkillMint helps beginners learn online skills step-by-step, gain confidence, and earn from YouTube, freelancing, affiliate marketing, and social media. All content is beginner-friendly, practical & trusted.
+</p>
+<div class="icons">
+ <div class="icon-card" onclick="scrollToSection('courses')"><i class="fas fa-video"></i> YouTube</div>
+ <div class="icon-card" onclick="scrollToSection('courses')"><i class="fas fa-laptop-code"></i> Freelancing</div>
+ <div class="icon-card" onclick="scrollToSection('courses')"><i class="fas fa-dollar-sign"></i> Affiliate</div>
+ <div class="icon-card" onclick="scrollToSection('courses')"><i class="fas fa-users"></i> Social Media</div>
+</div>
+</div>
+
+<div class="section" id="courses">
 <h2>Courses You Will Learn</h2>
 <div class="cards">
  <div class="card"><img src="https://picsum.photos/seed/course1/400/250" alt="YouTube"><h3>YouTube Earning</h3><p>Zero se channel setup, content, SEO aur monetization step by step.</p><span class="badge">Beginner Friendly</span></div>
@@ -59,8 +75,9 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 </div>
 
 <div class="section" id="reviews">
-<h2>Student Reviews</h2>
+<h2>Student Reviews & Trust</h2>
 <div class="slider" id="reviewSlider"></div>
+<p class="active-users" id="activeUsers">Active Users: 0</p>
 </div>
 
 <div class="section" id="buy">
@@ -77,7 +94,6 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 <div class="progress-bar"><div class="progress" id="progress"></div></div>
 <p id="status" style="font-size:13px;margin-top:6px"></p>
 <button class="btn green" id="open" disabled>Open Course</button>
-<p class="active-users" id="activeUsers">Active Users: 0</p>
 </div>
 
 <div class="section" id="faq">
@@ -104,7 +120,7 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 
 <div class="nav">
 <a href="#home">🏠<br>Home</a>
-<a href="#buy">🎓<br>Course</a>
+<a href="#courses">🎓<br>Courses</a>
 <a href="#faq">❓<br>FAQ</a>
 <a href="#bot">🤖<br>Bot</a>
 <a href="https://www.facebook.com" target="_blank">📘<br>FB</a>
@@ -113,15 +129,15 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin-to
 </div>
 
 <script>
+// Scroll to section
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
 // Payment
-function pay(m){
- price.value="500 PKR";
- if(m==="jazz") num.value="03705519562";
- if(m==="easy") num.value="03379827882";
- if(m==="binance") num.value="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
- navigator.clipboard.writeText(num.value);
- alert("Deposit number copied ✅");
-}
+function pay(m){price.value="500 PKR";
+if(m==="jazz") num.value="03705519562";
+if(m==="easy") num.value="03379827882";
+if(m==="binance") num.value="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
+navigator.clipboard.writeText(num.value);alert("Deposit number copied ✅");}
 
 // Proof verification countdown
 proof.onchange=()=>{
@@ -138,7 +154,7 @@ open.onclick=()=>{window.open("https://gtv140.github.io/SkillMint-complete-cours
 // FAQ toggle
 document.querySelectorAll(".faq h4").forEach(f=>{f.onclick=()=>{f.nextElementSibling.style.display=f.nextElementSibling.style.display==="block"?"none":"block";}})
 
-// Bot system
+// Bot
 function bot(){let x=q.value.toLowerCase(),r="Please ask a simple question.";
 if(x.includes("price")) r="Course price: 500 PKR.";
 if(x.includes("payment")) r="Payment methods: JazzCash, EasyPaisa, Binance.";
@@ -148,11 +164,11 @@ if(x.includes("freelance")) r="Complete Freelancing roadmap included.";
 a.innerText=r;}
 function botQuick(qs){q.value=qs;bot();}
 
-// Random active users
+// Active Users
 let activeCount=50;
 setInterval(()=>{activeCount=Math.floor(50+Math.random()*100);document.getElementById("activeUsers").innerText="Active Users: "+activeCount;},3000);
 
-// Generate 25 random reviews
+// Reviews
 const reviews=[
 {avatar:"https://picsum.photos/seed/avatar1/50/50",text:"Amazing course, YouTube setup clear." ,name:"Ali"},
 {avatar:"https://picsum.photos/seed/avatar2/50/50",text:"Freelancing roadmap is perfect.",name:"Sara"},
@@ -163,36 +179,12 @@ const reviews=[
 {avatar:"https://picsum.photos/seed/avatar7/50/50",text:"Payment verification is smooth.",name:"Tariq"},
 {avatar:"https://picsum.photos/seed/avatar8/50/50",text:"Great beginner friendly instructions.",name:"Amna"},
 {avatar:"https://picsum.photos/seed/avatar9/50/50",text:"I can now earn online.",name:"Fahad"},
-{avatar:"https://picsum.photos/seed/avatar10/50/50",text:"SkillMint helped me a lot.",name:"Sana"},
-{avatar:"https://picsum.photos/seed/avatar11/50/50",text:"Very professional course.",name:"Naveed"},
-{avatar:"https://picsum.photos/seed/avatar12/50/50",text:"Loved the UI and layout.",name:"Maya"},
-{avatar:"https://picsum.photos/seed/avatar13/50/50",text:"Clear instructions and tips.",name:"Hamza"},
-{avatar:"https://picsum.photos/seed/avatar14/50/50",text:"Fast results after practice.",name:"Rida"},
-{avatar:"https://picsum.photos/seed/avatar15/50/50",text:"Support and guidance is good.",name:"Shahzain"},
-{avatar:"https://picsum.photos/seed/avatar16/50/50",text:"Highly recommended!",name:"Zeeshan"},
-{avatar:"https://picsum.photos/seed/avatar17/50/50",text:"I learned so much.",name:"Mehwish"},
-{avatar:"https://picsum.photos/seed/avatar18/50/50",text:"Easy to follow steps.",name:"Umar"},
-{avatar:"https://picsum.photos/seed/avatar19/50/50",text:"Amazing course structure.",name:"Kiran"},
-{avatar:"https://picsum.photos/seed/avatar20/50/50",text:"Everything explained well.",name:"Areeba"},
-{avatar:"https://picsum.photos/seed/avatar21/50/50",text:"Practical tips are great.",name:"Saad"},
-{avatar:"https://picsum.photos/seed/avatar22/50/50",text:"I improved my skills.",name:"Hira"},
-{avatar:"https://picsum.photos/seed/avatar23/50/50",text:"Loved the progress tracker.",name:"Aliya"},
-{avatar:"https://picsum.photos/seed/avatar24/50/50",text:"Motivating course!",name:"Zain"},
-{avatar:"https://picsum.photos/seed/avatar25/50/50",text:"Will recommend to friends.",name:"Bilal"}
+{avatar:"https://picsum.photos/seed/avatar10/50/50",text:"SkillMint helped me a lot.",name:"Sana"}
 ];
-
 const slider=document.getElementById("reviewSlider");
 let reviewIndex=0;
-function showReviews(){
- slider.innerHTML="";
- for(let i=0;i<3;i++){
-  const r=reviews[(reviewIndex+i)%reviews.length];
-  slider.innerHTML+=`<div class="review"><img src="${r.avatar}" alt="Avatar"><p>"${r.text}"</p><span>— ${r.name}</span></div>`;
- }
- reviewIndex=(reviewIndex+1)%reviews.length;
-}
-showReviews();
-setInterval(showReviews,5000);
+function showReviews(){slider.innerHTML="";for(let i=0;i<3;i++){const r=reviews[(reviewIndex+i)%reviews.length];slider.innerHTML+=`<div class="review"><img src="${r.avatar}" alt="Avatar"><p>"${r.text}"</p><span>— ${r.name}</span></div>`;}reviewIndex=(reviewIndex+1)%reviews.length;}
+showReviews();setInterval(showReviews,5000);
 </script>
 
 </body>
