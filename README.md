@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,30 +9,55 @@
 body{font-family:'Roboto',sans-serif;background:#f5f5f5;color:#111;}
 a{text-decoration:none;color:inherit;}
 .container{max-width:1000px;margin:auto;padding:20px;}
+
+/* Header */
 header{text-align:center;margin-bottom:30px;}
-header h1{font-size:36px;color:#222;font-weight:700;margin-bottom:10px;}
-header p{font-size:18px;color:#555;}
-.section{margin-bottom:30px;}
-h2{color:#333;margin-bottom:20px;text-align:center;font-size:24px;}
-.card-container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.card{background:white;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.1);padding:20px;width:220px;transition:0.3s;}
+header h1{font-size:32px;color:#222;font-weight:700;margin-bottom:8px;}
+header p{font-size:16px;color:#555;}
+
+/* Sections */
+.section{margin-bottom:25px;}
+h2{color:#333;margin-bottom:15px;text-align:center;font-size:22px;}
+
+/* Cards */
+.card-container{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;}
+.card{background:white;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.1);padding:15px;width:220px;transition:0.3s;}
 .card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.15);}
 .card img{width:50px;height:50px;margin-bottom:10px;}
-.card h3{color:#222;margin-bottom:8px;font-size:16px;}
+.card h3{color:#222;margin-bottom:6px;font-size:16px;}
 .card p{font-size:14px;color:#555;}
+
+/* Payment & Inputs */
 .payBtn{padding:12px 0;margin:5px 0;border:none;border-radius:8px;color:white;background:#007BFF;cursor:pointer;font-weight:bold;width:100%;transition:0.3s;}
 .payBtn:hover{background:#0056b3;}
 #openCourse{padding:12px 0;font-size:16px;border:none;border-radius:8px;background:#28a745;color:white;cursor:pointer;width:100%;margin-top:10px;transition:0.3s;}
 #openCourse:hover{background:#218838;}
-input[type=file], input[type=text]{padding:10px;width:90%;border-radius:6px;border:1px solid #ccc;margin:5px auto;display:block;}
-.testimonial{background:white;border-radius:10px;padding:15px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+input[type=file], input[type=text]{padding:10px;width:95%;border-radius:6px;border:1px solid #ccc;margin:5px auto;display:block;}
+
+/* Testimonials */
+.testimonial{background:white;border-radius:10px;padding:12px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
 .testimonial p{font-style:italic;color:#555;font-size:14px;}
-.testimonial h4{margin-top:10px;color:#007BFF;font-size:14px;text-align:right;}
-.faq{background:#fff;border-radius:8px;padding:12px;margin:8px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.testimonial h4{margin-top:8px;color:#007BFF;font-size:14px;text-align:right;}
+
+/* FAQ */
+.faq{background:#fff;border-radius:8px;padding:10px;margin:8px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 .faq h4{cursor:pointer;color:#007BFF;}
 .faq p{display:none;padding-left:10px;color:#555;font-size:14px;}
+
+/* Chatbot */
+#chatUserInput{padding:10px;width:95%;border-radius:6px;border:1px solid #ccc;margin-bottom:8px;}
+
+/* Footer */
 footer{background:#222;color:white;padding:15px 10px;text-align:center;border-radius:8px;font-size:14px;margin-top:20px;}
-@media(max-width:600px){.card-container{flex-direction:column;align-items:center;}h2{font-size:20px;}header h1{font-size:28px;}.card{width:90%;}}
+
+/* Responsive */
+@media(max-width:600px){
+  .card-container{flex-direction:column;align-items:center;}
+  h2{font-size:20px;}
+  header h1{font-size:28px;}
+  .card{width:90%;}
+  .payBtn,#openCourse{font-size:14px;}
+}
 </style>
 </head>
 <body>
@@ -43,7 +67,7 @@ footer{background:#222;color:white;padding:15px 10px;text-align:center;border-ra
 <header>
 <h1>SkillMint</h1>
 <p>Learn, Earn & Grow Online – Step-by-step guidance for beginners</p>
-<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="SkillMint Logo" width="80">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="SkillMint Logo" width="70">
 </header>
 
 <!-- How SkillMint Helps -->
@@ -123,7 +147,7 @@ footer{background:#222;color:white;padding:15px 10px;text-align:center;border-ra
 <!-- Chat Bot Section -->
 <div class="section">
 <h2>Ask SkillMint Bot ❓</h2>
-<input type="text" id="chatUserInput" placeholder="Type your question here..." style="padding:10px; width:90%; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;">
+<input type="text" id="chatUserInput" placeholder="Type your question here...">
 <button onclick="chatBotReply()" style="padding:10px 20px; background:#007BFF; color:white; border:none; border-radius:8px; cursor:pointer;">Ask</button>
 <p id="chatResponse" style="margin-top:15px; color:#333;"></p>
 </div>
