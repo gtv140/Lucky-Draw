@@ -27,14 +27,20 @@ button:hover{opacity:.9;}
 .nav a.active{color:#22c55e;font-weight:bold;transform:translateY(-2px);}
 .loader{border:4px solid #f3f3f3;border-top:4px solid #6366f1;border-radius:50%;width:24px;height:24px;animation:spin 1s linear infinite;margin:auto;display:none;}
 @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.bot-container{background:#fff;border-radius:18px;padding:10px;max-height:300px;overflow-y:auto;box-shadow:0 6px 16px rgba(0,0,0,.08);margin-bottom:10px;}
+.bot-input{width:100%;padding:10px;border-radius:12px;border:1px solid #ccc;margin-top:6px;}
 </style>
 </head>
 <body>
+
 <div id="splash">SkillMint Loading...</div>
+
 <div class="header">
 <h1>SkillMint</h1>
 <p>Trusted Digital Skills Platform</p>
 </div>
+
+<!-- DASHBOARD -->
 <div class="dashboard">
   <div class="icon" onclick="openSec('courses',this)">
     <img src="https://img.icons8.com/fluency/96/online-course.png">
@@ -52,7 +58,13 @@ button:hover{opacity:.9;}
     <img src="https://img.icons8.com/fluency/96/info.png">
     <span>About</span>
   </div>
+  <div class="icon" onclick="openSec('ai',this)">
+    <img src="https://img.icons8.com/fluency/96/robot.png">
+    <span>AI Bot</span>
+  </div>
 </div>
+
+<!-- COURSES -->
 <div id="courses" class="section">
   <div class="loader" id="coursesLoader"></div>
   <div class="card">
@@ -61,6 +73,8 @@ button:hover{opacity:.9;}
     <button onclick="buyCourse()">Buy Course</button>
   </div>
 </div>
+
+<!-- REVIEWS -->
 <div id="reviews" class="section">
   <div class="loader" id="reviewsLoader"></div>
   <div class="card">
@@ -68,6 +82,8 @@ button:hover{opacity:.9;}
     <div id="reviewList"></div>
   </div>
 </div>
+
+<!-- BUY -->
 <div id="buy" class="section">
   <div class="loader" id="buyLoader"></div>
   <div class="card">
@@ -78,6 +94,8 @@ button:hover{opacity:.9;}
     <p id="verifyStatus"></p>
   </div>
 </div>
+
+<!-- ABOUT -->
 <div id="contact" class="section">
   <div class="loader" id="aboutLoader"></div>
   <div class="card">
@@ -87,16 +105,31 @@ button:hover{opacity:.9;}
     <p>👥 Active Users: <b id="users">1200</b></p>
   </div>
 </div>
+
+<!-- AI BOT -->
+<div id="ai" class="section">
+  <div class="card">
+    <h3>AI Skill Bot 🤖</h3>
+    <div class="bot-container" id="botContainer"></div>
+    <input type="text" id="botInput" class="bot-input" placeholder="Ask me about SkillMint courses..." onkeydown="if(event.key==='Enter'){askBot();}">
+    <button onclick="askBot()">Send</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="nav">
   <a href="#" class="active">🏠<br>Home</a>
   <a onclick="openSec('courses',null)">🎓<br>Courses</a>
   <a onclick="openSec('reviews',null)">👥<br>Reviews</a>
   <a href="mailto:Rock.earn92@gmail.com">✉️<br>Email</a>
 </div>
+
 <script>
 setTimeout(()=>document.getElementById('splash').style.display='none',1500);
+
 function showLoader(id){document.getElementById(id).style.display='block';}
 function hideLoader(id){document.getElementById(id).style.display='none';}
+
 function openSec(id,el){
   document.querySelectorAll('.section').forEach(s=>{s.classList.remove('show');});
   showLoader(id+'Loader');
@@ -108,6 +141,7 @@ function openSec(id,el){
   window.scrollTo({top:0,behavior:'smooth'});
   document.querySelectorAll('.nav a').forEach(nav=>nav.classList.remove('active'));
 }
+
 const names=["Ali Khan","Ayesha Malik","Usman Raza","Hina Shaikh","Bilal Ahmed","Zain Abbas","Maria Noor","Saad Iqbal","Sana Fatima","Hamza Qureshi","Rabia Aslam","Omer Farooq","Nimra Zahid","Hassan Ali","Laiba Khan","Arslan Butt","Iqra Javed","Shahzaib Tariq","Maham Rehman","Danish Akhtar","Fiza Noor","Kashif Mehmood","Anum Saleem","Taha Rauf","Mehwish Ali"];
 function loadReviews(){
   let box=document.getElementById("reviewList"); box.innerHTML="";
@@ -118,6 +152,7 @@ function loadReviews(){
   }
 }
 loadReviews();
+
 let timerInterval;
 function startPayment(){
   document.getElementById('verifyStatus').innerText='Processing Payment...';
@@ -133,6 +168,7 @@ function startPayment(){
     },1000);
   },1500);
 }
+
 function buyCourse(){
   document.getElementById('coursesLoader').style.display='block';
   setTimeout(()=>{
@@ -140,6 +176,7 @@ function buyCourse(){
     alert('Course access after payment');
   },1500);
 }
+
 function updateUsers(){
   let users = parseInt(localStorage.getItem('users')) || 1200;
   users += Math.floor(Math.random()*5);
@@ -147,6 +184,21 @@ function updateUsers(){
   localStorage.setItem('users',users);
 }
 setInterval(updateUsers,2000);
+
+// AI Bot
+function askBot(){
+  let input=document.getElementById('botInput').value.trim();
+  if(input==="") return;
+  let container=document.getElementById('botContainer');
+  container.innerHTML+=`<div><b>You:</b> ${input}</div>`;
+  document.getElementById('botInput').value='';
+  setTimeout(()=>{
+    let reply="SkillMint offers digital courses like Digital Marketing, Web Development, AI Tools, Graphic Designing, and Freelancing. You can buy courses from the Buy section.";
+    container.innerHTML+=`<div><b>Bot:</b> ${reply}</div>`;
+    container.scrollTop=container.scrollHeight;
+  },800);
+}
 </script>
+
 </body>
 </html>
