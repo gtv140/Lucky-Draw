@@ -1,322 +1,276 @@
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillMint</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>SkillMint – Learn & Earn Skills</title>
 
 <style>
-:root{
- --bg:#f3f6fb;
- --card:#ffffff;
- --text:#111;
- --primary:#2563eb;
- --success:#16a34a;
-}
-body.dark{
- --bg:#0f172a;
- --card:#020617;
- --text:#e5e7eb;
-}
-*{box-sizing:border-box}
 body{
- margin:0;
- font-family:system-ui,Arial;
- background:var(--bg);
- color:var(--text);
- padding-bottom:120px;
- transition:.3s;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f7fb;
+color:#222;
 }
 
-/* HEADER */
-.header{
- background:linear-gradient(90deg,#2563eb,#22c55e);
- color:#fff;
- padding:22px;
- text-align:center;
+header{
+background:linear-gradient(135deg,#0f9d58,#0b7d46);
+color:#fff;
+padding:20px;
+text-align:center;
 }
-.header img{width:100%;border-radius:14px;margin-top:10px}
 
-/* SECTIONS */
-.section{padding:18px}
-h2{text-align:center}
+header h1{margin:0;font-size:26px}
+header p{margin:5px 0;font-size:14px}
 
-/* CARDS */
-.cards{display:flex;flex-direction:column;gap:14px}
+.container{padding:15px}
+
 .card{
- background:var(--card);
- border-radius:16px;
- padding:16px;
- box-shadow:0 6px 18px rgba(0,0,0,.1);
- transition:.3s;
+background:#fff;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;border-radius:12px}
 
-/* ICONS */
-.icons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.icons{
+display:flex;
+justify-content:space-around;
+text-align:center;
+margin-bottom:12px;
+}
+
 .icon{
- background:var(--card);
- width:22%;
- min-width:70px;
- padding:12px;
- border-radius:14px;
- text-align:center;
- box-shadow:0 4px 12px rgba(0,0,0,.1);
- display:none;
- cursor:pointer;
- transition:.3s;
-}
-.icon:hover{transform:scale(1.05)}
-.icon i{font-size:26px;color:var(--primary)}
-
-/* BUTTONS */
-.btn{
- width:100%;
- padding:14px;
- border:none;
- border-radius:14px;
- background:var(--primary);
- color:#fff;
- font-size:15px;
- margin-top:8px;
- cursor:pointer;
-}
-.btn.green{background:var(--success)}
-
-/* REVIEWS */
-.slider{display:flex;gap:10px;overflow:hidden}
-.review{
- background:var(--card);
- min-width:220px;
- padding:12px;
- border-radius:14px;
- box-shadow:0 4px 14px rgba(0,0,0,.1);
+cursor:pointer;
+font-size:13px;
 }
 
-/* INPUT */
+.icon img{
+width:42px;
+margin-bottom:6px;
+}
+
+.hidden{display:none}
+
+button{
+background:#0f9d58;
+color:#fff;
+border:none;
+padding:10px 15px;
+border-radius:8px;
+cursor:pointer;
+font-size:14px;
+}
+
+button:hover{opacity:.9}
+
+.course{
+display:flex;
+gap:10px;
+align-items:center;
+margin-bottom:12px;
+}
+
+.course img{
+width:80px;
+border-radius:8px;
+}
+
 input{
- width:100%;
- padding:12px;
- border-radius:12px;
- border:1px solid #ccc;
- margin-top:6px;
+width:100%;
+padding:10px;
+margin-top:6px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
-/* NAV */
-.nav{
- position:fixed;
- bottom:0;left:0;
- width:100%;
- background:var(--card);
- display:flex;
- justify-content:space-around;
- padding:10px 0;
- box-shadow:0 -4px 14px rgba(0,0,0,.2);
-}
-.nav a{text-decoration:none;font-size:11px;color:var(--text);text-align:center}
-
-/* DARK MODE BTN */
-.toggle{
- position:fixed;
- top:14px;
- right:14px;
- background:#fff;
- padding:8px 10px;
- border-radius:50%;
- cursor:pointer;
-}
-
-@media(min-width:768px){
- .cards{flex-direction:row;flex-wrap:wrap}
- .card{width:48%}
-}
+#verifyStatus{font-size:13px;margin-top:5px;color:green;}
 </style>
 </head>
 
 <body>
 
-<div class="toggle" onclick="toggleMode()">🌙</div>
+<header>
+<h1>SkillMint</h1>
+<p>Trusted Platform to Learn Skills & Earn Online</p>
+</header>
 
-<!-- HEADER -->
-<div class="header">
- <h1>SkillMint</h1>
- <p>Learn Skills • Earn Online • Trusted Platform</p>
- <img src="https://picsum.photos/seed/banner/1200/400">
+<div class="container">
+
+<div class="card">
+<h3>About SkillMint</h3>
+<p>
+SkillMint ek trusted learning platform hai jahan students practical skills seekh kar 
+online earning start kar sakte hain. Ham beginner se advanced level tak courses offer 
+karte hain jo real market demand par based hote hain.
+</p>
 </div>
 
-<!-- HOME -->
-<div class="section">
- <h2>About SkillMint</h2>
- <p style="text-align:center;max-width:650px;margin:auto">
- SkillMint ek trusted online learning platform hai jo beginners ko
- YouTube, Freelancing, Affiliate Marketing aur Social Media se
- earning sikhata hai — step by step aur practical tareeke se.
- </p>
+<div class="card icons">
+<div class="icon" onclick="openSection('courses')">
+<img src="https://img.icons8.com/fluency/96/online-course.png">
+Courses
+</div>
 
- <p id="users" style="text-align:center;color:#16a34a;font-weight:bold"></p>
+<div class="icon" onclick="openSection('reviews')">
+<img src="https://img.icons8.com/fluency/96/star.png">
+Reviews
+</div>
 
- <div class="slider" id="reviews"></div>
+<div class="icon" onclick="openSection('buy')">
+<img src="https://img.icons8.com/fluency/96/credit-card.png">
+Buy Course
+</div>
 
- <div class="icons">
-  <div class="icon" onclick="go('courses')"><i class="fa fa-video"></i><br>YouTube</div>
-  <div class="icon" onclick="go('courses')"><i class="fa fa-laptop-code"></i><br>Freelance</div>
-  <div class="icon" onclick="go('courses')"><i class="fa fa-dollar-sign"></i><br>Affiliate</div>
-  <div class="icon" onclick="go('courses')"><i class="fa fa-users"></i><br>Social</div>
- </div>
-
- <div class="btn" onclick="showIcons()">More</div>
+<div class="icon" onclick="openSection('more')">
+<img src="https://img.icons8.com/fluency/96/menu.png">
+More
+</div>
 </div>
 
 <!-- COURSES -->
-<div class="section" id="courses">
- <h2>Our Courses</h2>
- <div class="cards">
+<div id="courses" class="card hidden">
+<h3>Popular Courses</h3>
 
-  <div class="card">
-   <img src="https://picsum.photos/seed/yt/400/250">
-   <h3>YouTube Earning</h3>
-   <p>Complete YouTube monetization roadmap.</p>
-   <button class="btn" onclick="buyCourse('YouTube Earning')">Buy Course</button>
-  </div>
-
-  <div class="card">
-   <img src="https://picsum.photos/seed/free/400/250">
-   <h3>Freelancing</h3>
-   <p>Fiverr & Upwork beginner guide.</p>
-   <button class="btn" onclick="buyCourse('Freelancing')">Buy Course</button>
-  </div>
-
-  <div class="card">
-   <img src="https://picsum.photos/seed/aff/400/250">
-   <h3>Affiliate Marketing</h3>
-   <p>Earn commission step by step.</p>
-   <button class="btn" onclick="buyCourse('Affiliate Marketing')">Buy Course</button>
-  </div>
-
-  <div class="card">
-   <img src="https://picsum.photos/seed/social/400/250">
-   <h3>Social Media Growth</h3>
-   <p>Instagram & Facebook organic growth.</p>
-   <button class="btn" onclick="buyCourse('Social Media Growth')">Buy Course</button>
-  </div>
-
- </div>
+<div class="course">
+<img src="https://picsum.photos/200?1">
+<div>
+<b>Digital Marketing</b><br>
+<button onclick="buyCourse('Digital Marketing')">Buy Course</button>
+</div>
 </div>
 
-<!-- BUY SECTION -->
-<div class="section" id="buy">
- <h2>Buy Course</h2>
-
- <p id="selectedCourse" style="font-weight:bold"></p>
-
- <label>Course Price</label>
- <input readonly value="500 PKR">
-
- <label>Deposit Number</label>
- <input id="number" readonly placeholder="Select payment method">
-
- <button class="btn" onclick="pay('jazz')">JazzCash</button>
- <button class="btn" onclick="pay('easy')">EasyPaisa</button>
- <button class="btn" onclick="pay('binance')">Binance</button>
-
- <label>Upload Payment Proof</label>
- <input type="file" id="proof">
-
- <p id="verifyStatus"></p>
-
- <button class="btn green" id="openCourse" disabled>Open Course</button>
+<div class="course">
+<img src="https://picsum.photos/200?2">
+<div>
+<b>Graphic Designing</b><br>
+<button onclick="buyCourse('Graphic Designing')">Buy Course</button>
+</div>
 </div>
 
-<!-- FLOAT CHAT -->
-<a href="https://wa.me/923379827882" style="position:fixed;right:16px;bottom:90px;background:#22c55e;color:#fff;padding:14px;border-radius:50%">💬</a>
+<div class="course">
+<img src="https://picsum.photos/200?3">
+<div>
+<b>Web Development</b><br>
+<button onclick="buyCourse('Web Development')">Buy Course</button>
+</div>
+</div>
+</div>
 
-<!-- NAV -->
-<div class="nav">
- <a href="#">🏠<br>Home</a>
- <a href="#courses">🎓<br>Courses</a>
- <a href="https://www.facebook.com/profile.php?id=100084218946114">📘<br>FB</a>
- <a href="https://www.instagram.com/mr_nazim073">📸<br>IG</a>
- <a href="mailto:Rock.earn92@gmail.com">✉️<br>Email</a>
+<!-- REVIEWS -->
+<div id="reviews" class="card hidden">
+<h3>Students Reviews</h3>
+<div id="reviewBox"></div>
+</div>
+
+<!-- BUY / PAYMENT SECTION -->
+<div id="buy" class="card hidden">
+<h3>Buy Course</h3>
+<p id="selectedCourse" style="font-weight:bold"></p>
+
+<label>Course Price</label>
+<input id="price" readonly value="500 PKR">
+
+<label>Deposit Number</label>
+<input id="number" readonly placeholder="Select payment method">
+
+<button onclick="pay('jazz')">JazzCash</button>
+<button onclick="pay('easy')">EasyPaisa</button>
+<button onclick="pay('binance')">Binance</button>
+
+<label>Upload Payment Proof</label>
+<input type="file" id="proof">
+
+<p id="verifyStatus"></p>
+
+<button id="openCourse" disabled>Open Course</button>
+</div>
+
+<!-- MORE / CONTACT -->
+<div id="more" class="card hidden">
+<h3>Contact & Trust</h3>
+<p>👥 Active Users: <b id="users"></b></p>
+<p>Email: <b>Rock.earn92@gmail.com</b></p>
+<p>
+<a href="https://www.facebook.com/profile.php?id=100084218946114">Facebook</a> |
+<a href="https://www.instagram.com/mr_nazim073">Instagram</a>
+</p>
+</div>
+
 </div>
 
 <script>
-/* DARK MODE */
-function toggleMode(){
- document.body.classList.toggle("dark");
- localStorage.setItem("mode",document.body.classList.contains("dark"));
-}
-if(localStorage.getItem("mode")==="true") document.body.classList.add("dark");
-
-/* ICONS */
-function showIcons(){
- document.querySelectorAll(".icon").forEach(i=>i.style.display="block");
+// ICONS
+function openSection(id){
+document.querySelectorAll('.card.hidden').forEach(x=>x.style.display='none');
+document.getElementById(id).style.display='block';
 }
 
-/* REVIEWS */
-const reviews=[
-"Trusted platform",
-"Beginner friendly",
-"Real earning guidance",
-"SkillMint is legit",
-"Support is very good"
-];
-let r=document.getElementById("reviews"),i=0;
-setInterval(()=>{
- r.innerHTML=`<div class="review">${reviews[i%reviews.length]}</div>`;
- i++;
-},3000);
-
-/* USERS */
-setInterval(()=>{
- document.getElementById("users").innerText=
- "Active Users: "+(100+Math.floor(Math.random()*200));
-},2500);
-
-/* BUY FLOW */
+// BUY FLOW
 let selected="";
 function buyCourse(name){
- selected=name;
- selectedCourse.innerText="Selected Course: "+name;
- buy.scrollIntoView({behavior:"smooth"});
+selected=name;
+selectedCourse.innerText="Selected Course: "+name;
+openSection('buy');
 }
 
 function pay(method){
- let num="";
- if(method==="jazz") num="03705519562";
- if(method==="easy") num="03379827882";
- if(method==="binance") num="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
-
- number.value=num;
- navigator.clipboard.writeText(num);
- localStorage.setItem("timer",300);
- startTimer();
+let num="";
+if(method==="jazz") num="03705519562";
+if(method==="easy") num="03379827882";
+if(method==="binance") num="0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F";
+number.value=num;
+navigator.clipboard.writeText(num);
+alert("Deposit number copied ✅");
+localStorage.setItem("timer",300);
+startTimer();
 }
 
 function startTimer(){
- let t=localStorage.getItem("timer")||300;
- let int=setInterval(()=>{
-  if(t<=0){
-   clearInterval(int);
-   verifyStatus.innerText="Payment Verified ✔";
-   openCourse.disabled=false;
-   localStorage.removeItem("timer");
-  }else{
-   verifyStatus.innerText="Verifying... "+t+"s";
-   t--;
-   localStorage.setItem("timer",t);
-  }
- },1000);
+let t=localStorage.getItem("timer")||300;
+let int=setInterval(()=>{
+if(t<=0){
+clearInterval(int);
+verifyStatus.innerText="Payment Verified ✔";
+openCourse.disabled=false;
+localStorage.removeItem("timer");
+}else{
+verifyStatus.innerText="Verifying... "+t+"s";
+t--;
+localStorage.setItem("timer",t);
+}
+},1000);
 }
 
 proof.onchange=startTimer;
 openCourse.onclick=()=>alert("Course Opened: "+selected);
 
-/* SCROLL */
-function go(id){
- document.getElementById(id).scrollIntoView({behavior:"smooth"});
+// REVIEWS
+const reviews=[
+"Best platform for beginners 👍",
+"SkillMint changed my life ❤️",
+"Courses are very practical",
+"Highly trusted website",
+"I earned my first income from here",
+"Support team is helpful",
+"Easy to use on mobile",
+"Worth every rupee",
+"Professional learning experience",
+"Recommended to all students"
+];
+
+function loadReviews(){
+let box=document.getElementById("reviewBox");
+box.innerHTML="";
+for(let i=0;i<20;i++){
+let r=reviews[Math.floor(Math.random()*reviews.length)];
+box.innerHTML+=`<div class="review">⭐ ${r}</div>`;
 }
+}
+loadReviews();
+
+// ACTIVE USERS
+setInterval(()=>{
+document.getElementById("users").innerText=Math.floor(1200+Math.random()*800);
+},2000);
 </script>
 
 </body>
