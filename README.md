@@ -4,35 +4,34 @@
 <title>SkillMint – Learn & Earn Skills</title>
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#222;padding-bottom:120px;}
-header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:20px;text-align:center;}
-header h1{margin:0;font-size:26px}
-header p{margin:5px 0;font-size:14px}
-.container{padding:15px}
-.card{background:#fff;border-radius:12px;padding:15px;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,0,0,0.08);}
-.icons{display:flex;justify-content:space-around;text-align:center;margin-bottom:12px;}
-.icon{cursor:pointer;font-size:13px;}
-.icon img{width:42px;margin-bottom:6px;}
-.hidden{display:none}
-button{background:#0f9d58;color:#fff;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;font-size:14px;margin-top:5px;}
+header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:15px;text-align:center;}
+header h1{margin:0;font-size:22px}
+header p{margin:4px 0;font-size:12px}
+.container{padding:10px}
+.card{background:#fff;border-radius:10px;padding:12px;margin-bottom:12px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+.icons{display:flex;flex-wrap:wrap;justify-content:space-around;text-align:center;margin-bottom:10px;}
+.icon{cursor:pointer;font-size:12px;width:22%;margin-bottom:10px;}
+.icon img{width:36px;margin-bottom:4px;}
+.hidden{display:none;}
+button{background:#0f9d58;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:13px;margin-top:4px;}
 button:hover{opacity:.9}
-.course{display:flex;gap:10px;align-items:center;margin-bottom:12px;}
-.course img{width:80px;border-radius:8px;}
-input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ccc;}
-#verifyStatus{font-size:13px;margin-top:5px;color:green;}
-#chatbot{position:fixed;bottom:20px;right:20px;width:320px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column;height:420px;}
-#chatHeader{background:#0f9d58;color:#fff;padding:10px;text-align:center;cursor:pointer;}
-#chatBody{flex:1;padding:10px;overflow-y:auto;}
+.course{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
+.course img{width:70px;border-radius:6px;}
+input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #ccc;}
+#verifyStatus{font-size:12px;margin-top:4px;color:green;}
+#chatbot{position:fixed;bottom:10px;right:10px;width:90%;max-width:320px;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.3);display:flex;flex-direction:column;height:380px;}
+#chatHeader{background:#0f9d58;color:#fff;padding:10px;text-align:center;cursor:pointer;font-size:14px;}
+#chatBody{flex:1;padding:8px;overflow-y:auto;font-size:13px;}
 #chatInput{display:flex;border-top:1px solid #ccc;}
-#chatInput input{flex:1;padding:8px;border:none}
-#chatInput button{padding:8px;background:#0f9d58;color:#fff;border:none;cursor:pointer;}
-.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -4px 12px rgba(0,0,0,0.15);}
-.nav a{text-align:center;font-size:11px;color:#222;text-decoration:none;}
-.review{margin-bottom:6px;}
+#chatInput input{flex:1;padding:6px;border:none;font-size:13px;}
+#chatInput button{padding:6px;background:#0f9d58;color:#fff;border:none;cursor:pointer;font-size:13px;}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 10px rgba(0,0,0,0.15);}
+.nav a{text-align:center;font-size:10px;color:#222;text-decoration:none;flex:1;}
+.review{margin-bottom:4px;}
 .dark-mode{background:#121212;color:#fff;}
 .dark-mode .card{background:#1e1e1e;color:#fff;}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -55,14 +54,13 @@ input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid 
 <img src="https://img.icons8.com/fluency/96/star.png">Reviews
 </div>
 <div class="icon" onclick="openSection('buy')">
-<img src="https://img.icons8.com/fluency/96/credit-card.png">Buy Course
+<img src="https://img.icons8.com/fluency/96/credit-card.png">Buy
 </div>
 <div class="icon" onclick="openSection('more')">
 <img src="https://img.icons8.com/fluency/96/menu.png">More
 </div>
 </div>
 
-<!-- COURSES -->
 <div id="courses" class="card hidden">
 <h3>Popular Courses</h3>
 <div class="course">
@@ -79,13 +77,11 @@ input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid 
 </div>
 </div>
 
-<!-- REVIEWS -->
 <div id="reviews" class="card hidden">
 <h3>Students Reviews</h3>
 <div id="reviewBox"></div>
 </div>
 
-<!-- BUY / PAYMENT -->
 <div id="buy" class="card hidden">
 <h3>Buy Course</h3>
 <p id="selectedCourse" style="font-weight:bold"></p>
@@ -100,7 +96,6 @@ input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid 
 <button id="openCourse" disabled>Open Course</button>
 </div>
 
-<!-- MORE / CONTACT -->
 <div id="more" class="card hidden">
 <h3>Contact & Trust</h3>
 <p>👥 Active Users: <b id="users"></b></p>
@@ -114,7 +109,6 @@ input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid 
 
 </div>
 
-<!-- CHATBOT -->
 <div id="chatbot">
 <div id="chatHeader" onclick="toggleChat()">💬 AI Chat</div>
 <div id="chatBody"></div>
@@ -174,7 +168,7 @@ setInterval(()=>{document.getElementById("users").innerText=Math.floor(1200+Math
 
 // CHATBOT AI
 let chatOpen=true;
-function toggleChat(){let body=document.getElementById("chatBody");let parent=body.parentElement;parent.style.height = chatOpen?"40px":"420px";chatOpen=!chatOpen;}
+function toggleChat(){let body=document.getElementById("chatBody");let parent=body.parentElement;parent.style.height = chatOpen?"40px":"380px";chatOpen=!chatOpen;}
 async function sendMsg(){
 let input=document.getElementById("userMsg");let text=input.value.trim();if(!text)return;
 addChat("You",text);input.value="";addChat("Bot","Typing...");
