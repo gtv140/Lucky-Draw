@@ -2,107 +2,134 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SkillMint</title>
+
 <style>
+:root{--grad:linear-gradient(135deg,#6366f1,#22c55e);}
 body{margin:0;font-family:system-ui,sans-serif;background:#eef2ff;color:#222;overflow-x:hidden;}
-#splash{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#6366f1,#22c55e);display:flex;justify-content:center;align-items:center;z-index:9999;flex-direction:column;color:#fff;font-size:24px;}
-.header{background:linear-gradient(135deg,#6366f1,#22c55e);color:#fff;padding:20px 16px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;position:sticky;top:0;z-index:100;}
-.header h1{margin:0;font-size:22px;}
-.header p{margin:6px 0 0;font-size:13px;opacity:.9;}
-.dashboard{padding:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-.icon{background:#fff;border-radius:18px;padding:12px 6px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;}
-.icon img{width:42px;}
-.icon span{display:block;font-size:11px;margin-top:6px;}
-.icon.active{box-shadow:0 8px 20px rgba(0,0,0,.2);transform:translateY(-2px);}
-.section{display:none;padding:14px;opacity:0;transition:opacity .4s;}
-.section.show{display:block;opacity:1;}
-.card{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);}
-.review{display:flex;gap:10px;margin-bottom:12px;}
-.review img{width:42px;height:42px;border-radius:50%;}
-.review b{font-size:13px;}
-.review p{margin:2px 0 0;font-size:12px;color:#555;}
-button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#22c55e);color:#fff;font-size:14px;margin-top:6px;cursor:pointer;transition:all .3s;}
-button:hover{opacity:.9;}
-.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -4px 12px rgba(0,0,0,.15);z-index:999;}
-.nav a{text-decoration:none;font-size:11px;color:#222;text-align:center;flex:1;transition:all .2s;}
-.nav a.active{color:#22c55e;font-weight:bold;transform:translateY(-2px);}
-.loader{border:4px solid #f3f3f3;border-top:4px solid #6366f1;border-radius:50%;width:24px;height:24px;animation:spin 1s linear infinite;margin:auto;display:none;}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-.bot-container{background:#fff;border-radius:18px;padding:10px;max-height:300px;overflow-y:auto;box-shadow:0 6px 16px rgba(0,0,0,.08);margin-bottom:10px;}
-.bot-input{width:100%;padding:10px;border-radius:12px;border:1px solid #ccc;margin-top:6px;}
+.dark{background:#0f172a;color:#e5e7eb}
+.hide{display:none}
+
+#splash{position:fixed;inset:0;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;z-index:9999}
+
+.header{background:var(--grad);color:#fff;padding:20px;border-radius:0 0 26px 26px;text-align:center;position:sticky;top:0;z-index:9}
+.header button{background:#fff;color:#000;border:none;padding:6px 12px;border-radius:20px;margin-top:8px}
+
+/* DASHBOARD */
+.dashboard{padding:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.icon{background:#fff;border-radius:18px;text-align:center;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.1);cursor:pointer;transition:.3s}
+.icon:hover{transform:translateY(-4px)}
+.icon img{width:44px}
+.icon span{font-size:11px;display:block;margin-top:6px}
+
+/* SECTIONS */
+.section{padding:14px;display:none}
+.card{background:#fff;border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.1)}
+
+/* COURSES */
+.course{display:flex;gap:12px;align-items:center}
+.course img{width:90px;height:90px;border-radius:14px;object-fit:cover}
+.price{font-weight:bold;color:#22c55e}
+
+/* BUTTON */
+button{width:100%;border:none;padding:10px;border-radius:14px;background:var(--grad);color:#fff;font-size:14px;margin-top:8px}
+
+/* REVIEWS */
+.slider{display:flex;gap:12px;overflow:hidden;scroll-behavior:smooth}
+.review{min-width:240px;background:#fff;border-radius:16px;padding:12px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.review img{width:40px;height:40px;border-radius:50%}
+.review b{font-size:13px}
+.review p{margin:4px 0 0;font-size:12px;color:#555}
+
+/* LOGIN */
+input{width:100%;padding:10px;border-radius:12px;border:1px solid #ccc;margin-top:8px}
+
+/* BOTTOM NAV */
+.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;box-shadow:0 -4px 12px rgba(0,0,0,.2)}
+.nav div{text-align:center;font-size:11px;padding:6px}
 </style>
 </head>
+
 <body>
 
 <div id="splash">SkillMint Loading...</div>
 
 <div class="header">
-<h1>SkillMint</h1>
-<p>Trusted Digital Skills Platform</p>
+  <h2>SkillMint</h2>
+  <p>Learn Skills • Earn Online</p>
+  <button onclick="toggleDark()">Dark Mode</button>
 </div>
 
 <!-- DASHBOARD -->
 <div class="dashboard">
-  <div class="icon" onclick="openSec('courses',this)">
+  <div class="icon" onclick="openSec('courses')">
     <img src="https://img.icons8.com/fluency/96/online-course.png">
     <span>Courses</span>
   </div>
-  <div class="icon" onclick="openSec('reviews',this)">
+  <div class="icon" onclick="openSec('reviews')">
     <img src="https://img.icons8.com/fluency/96/group.png">
     <span>Reviews</span>
   </div>
-  <div class="icon" onclick="openSec('buy',this)">
+  <div class="icon" onclick="openSec('payment')">
     <img src="https://img.icons8.com/fluency/96/credit-card.png">
-    <span>Buy</span>
+    <span>Payment</span>
   </div>
-  <div class="icon" onclick="openSec('contact',this)">
-    <img src="https://img.icons8.com/fluency/96/info.png">
-    <span>About</span>
-  </div>
-  <div class="icon" onclick="openSec('ai',this)">
+  <div class="icon" onclick="openSec('ai')">
     <img src="https://img.icons8.com/fluency/96/robot.png">
     <span>AI Bot</span>
+  </div>
+  <div class="icon" onclick="openSec('login')">
+    <img src="https://img.icons8.com/fluency/96/user.png">
+    <span>Login</span>
   </div>
 </div>
 
 <!-- COURSES -->
 <div id="courses" class="section">
-  <div class="loader" id="coursesLoader"></div>
-  <div class="card">
-    <h3>Available Courses</h3>
-    <p>Digital Marketing, Web Development, Graphic Designing, AI Tools, Freelancing</p>
-    <button onclick="buyCourse()">Buy Course</button>
+  <div class="card course">
+    <img src="https://picsum.photos/200?1">
+    <div>
+      <b>Digital Marketing</b><br>
+      <span class="price">PKR 9,999 / $35</span>
+      <button onclick="buyCourse('Digital Marketing')">Buy</button>
+    </div>
+  </div>
+  <div class="card course">
+    <img src="https://picsum.photos/200?2">
+    <div>
+      <b>Web Development</b><br>
+      <span class="price">PKR 14,999 / $55</span>
+      <button onclick="buyCourse('Web Development')">Buy</button>
+    </div>
+  </div>
+  <div class="card course">
+    <img src="https://picsum.photos/200?3">
+    <div>
+      <b>AI Tools + Freelancing</b><br>
+      <span class="price">PKR 12,999 / $45</span>
+      <button onclick="buyCourse('AI Tools')">Buy</button>
+    </div>
   </div>
 </div>
 
 <!-- REVIEWS -->
 <div id="reviews" class="section">
-  <div class="loader" id="reviewsLoader"></div>
   <div class="card">
     <h3>Student Reviews</h3>
-    <div id="reviewList"></div>
+    <div class="slider" id="revBox"></div>
   </div>
 </div>
 
-<!-- BUY -->
-<div id="buy" class="section">
-  <div class="loader" id="buyLoader"></div>
+<!-- PAYMENT -->
+<div id="payment" class="section">
   <div class="card">
-    <h3>Payment</h3>
-    <p>JazzCash / EasyPaisa / Binance supported</p>
-    <p>Deposit Number: <b id="depositNum">03705519562</b></p>
-    <button onclick="startPayment()">Start Verification</button>
-    <p id="verifyStatus"></p>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<div id="contact" class="section">
-  <div class="loader" id="aboutLoader"></div>
-  <div class="card">
-    <h3>About SkillMint</h3>
-    <p>SkillMint is a trusted platform helping students learn digital skills & earn online.</p>
-    <p>Email: Rock.earn92@gmail.com</p>
-    <p>👥 Active Users: <b id="users">1200</b></p>
+    <h3>Payment Method</h3>
+    <p>JazzCash / EasyPaisa / Bank Transfer</p>
+    <p>Send screenshot proof to:</p>
+    <b>Email:</b> Rock.earn92@gmail.com<br>
+    <b>Facebook / Instagram DM</b>
+    <input type="file">
+    <button onclick="startTimer()">Submit Proof</button>
+    <p id="timer"></p>
   </div>
 </div>
 
@@ -110,93 +137,111 @@ button:hover{opacity:.9;}
 <div id="ai" class="section">
   <div class="card">
     <h3>AI Skill Bot 🤖</h3>
-    <div class="bot-container" id="botContainer"></div>
-    <input type="text" id="botInput" class="bot-input" placeholder="Ask me about SkillMint courses..." onkeydown="if(event.key==='Enter'){askBot();}">
-    <button onclick="askBot()">Send</button>
+    <div id="chat" style="max-height:200px;overflow-y:auto;margin-bottom:6px;"></div>
+    <input id="q" placeholder="Ask about courses">
+    <button onclick="ask()">Ask</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="section">
+  <div class="card">
+    <h3>Login / Signup</h3>
+    <input id="email" placeholder="Email">
+    <input id="pass" placeholder="Password">
+    <button onclick="saveLogin()">Login</button>
   </div>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="nav">
-  <a href="#" class="active">🏠<br>Home</a>
-  <a onclick="openSec('courses',null)">🎓<br>Courses</a>
-  <a onclick="openSec('reviews',null)">👥<br>Reviews</a>
-  <a href="mailto:Rock.earn92@gmail.com">✉️<br>Email</a>
+  <div onclick="openSec('courses')">🏠 Home</div>
+  <div onclick="openSec('payment')">💳 Pay</div>
+  <div onclick="openSec('login')">👤 Account</div>
 </div>
 
 <script>
-setTimeout(()=>document.getElementById('splash').style.display='none',1500);
+setTimeout(()=>splash.style.display="none",1200)
 
-function showLoader(id){document.getElementById(id).style.display='block';}
-function hideLoader(id){document.getElementById(id).style.display='none';}
+/* THEME */
+function toggleDark(){document.body.classList.toggle("dark")}
 
-function openSec(id,el){
-  document.querySelectorAll('.section').forEach(s=>{s.classList.remove('show');});
-  showLoader(id+'Loader');
+/* SECTIONS */
+function openSec(id){
+  document.querySelectorAll('.section').forEach(s=>s.style.display="none")
+  document.getElementById(id).style.display="block"
+  localStorage.setItem("last",id)
+}
+let last=localStorage.getItem("last")
+if(last)openSec(last)
+
+/* BUY */
+function buyCourse(name){
+  localStorage.setItem("course",name)
+  alert(name+" selected. Complete payment.")
+  openSec("payment")
+}
+
+/* TIMER & COURSE UNLOCK */
+function startTimer(){
+  let t=180
+  localStorage.setItem("timer",t)
+  timer.innerText="Verifying payment: "+t+"s"
+  let x=setInterval(()=>{
+    t--
+    timer.innerText="Verifying payment: "+t+"s"
+    localStorage.setItem("timer",t)
+    if(t<=0){
+      clearInterval(x)
+      timer.innerText="✔ Course Unlocked"
+      alert("Course link activated!")
+      // Open course in new tab
+      window.open("https://gtv140.github.io/SkillMint-complete-course-/","_blank")
+      localStorage.removeItem("timer")
+    }
+  },1000)
+}
+
+/* REVIEWS */
+let reviews=[
+"SkillMint se earning start ho gayi 👍",
+"बहुत बढ़िया platform hai",
+"AI tools bohot helpful hain",
+"میں satisfied ہوں",
+"Real skills, real results",
+"Freelancing confidence mila",
+"Digital skills ne meri life change ki",
+"SkillMint ki wajah se paisa earn ho raha hai",
+"बहुत आसान और understandable",
+"Courses clear aur practical hain"
+]
+reviews.forEach(r=>{
+  let img=Math.floor(Math.random()*70)
+  revBox.innerHTML+=`
+  <div class="review">
+    <img src="https://i.pravatar.cc/100?img=${img}">
+    <p>${r}</p>
+  </div>`
+})
+setInterval(()=>revBox.scrollLeft+=260,2500)
+
+/* AI BOT */
+function ask(){
+  chat.innerHTML+="<p><b>You:</b> "+q.value+"</p>"
   setTimeout(()=>{
-    hideLoader(id+'Loader');
-    document.getElementById(id).classList.add('show');
-  },800);
-  if(el){document.querySelectorAll('.icon').forEach(ic=>ic.classList.remove('active'));el.classList.add('active');}
-  window.scrollTo({top:0,behavior:'smooth'});
-  document.querySelectorAll('.nav a').forEach(nav=>nav.classList.remove('active'));
+    chat.innerHTML+="<p><b>Bot:</b> SkillMint courses help you learn & earn online!</p>"
+    chat.scrollTop=chat.scrollHeight
+  },700)
 }
 
-const names=["Ali Khan","Ayesha Malik","Usman Raza","Hina Shaikh","Bilal Ahmed","Zain Abbas","Maria Noor","Saad Iqbal","Sana Fatima","Hamza Qureshi","Rabia Aslam","Omer Farooq","Nimra Zahid","Hassan Ali","Laiba Khan","Arslan Butt","Iqra Javed","Shahzaib Tariq","Maham Rehman","Danish Akhtar","Fiza Noor","Kashif Mehmood","Anum Saleem","Taha Rauf","Mehwish Ali"];
-function loadReviews(){
-  let box=document.getElementById("reviewList"); box.innerHTML="";
-  for(let i=0;i<25;i++){
-    let n=names[Math.floor(Math.random()*names.length)];
-    let img=Math.floor(Math.random()*70);
-    box.innerHTML+=`<div class="review"><img src="https://i.pravatar.cc/100?img=${img}"><div><b>${n}</b><p>SkillMint helped me gain practical skills and start earning online. Trusted & easy!</p></div></div>`;
-  }
-}
-loadReviews();
-
-let timerInterval;
-function startPayment(){
-  document.getElementById('verifyStatus').innerText='Processing Payment...';
-  setTimeout(()=>{
-    let t = parseInt(localStorage.getItem('timer')) || 60;
-    document.getElementById('verifyStatus').innerText='Verifying: '+t+'s';
-    clearInterval(timerInterval);
-    timerInterval=setInterval(()=>{
-      t--;
-      document.getElementById('verifyStatus').innerText='Verifying: '+t+'s';
-      localStorage.setItem('timer',t);
-      if(t<=0){clearInterval(timerInterval);document.getElementById('verifyStatus').innerText='Payment Verified ✔';localStorage.removeItem('timer');}
-    },1000);
-  },1500);
-}
-
-function buyCourse(){
-  document.getElementById('coursesLoader').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('coursesLoader').style.display='none';
-    alert('Course access after payment');
-  },1500);
-}
-
-function updateUsers(){
-  let users = parseInt(localStorage.getItem('users')) || 1200;
-  users += Math.floor(Math.random()*5);
-  document.getElementById('users').innerText=users;
-  localStorage.setItem('users',users);
-}
-setInterval(updateUsers,2000);
-
-// AI Bot
-function askBot(){
-  let input=document.getElementById('botInput').value.trim();
-  if(input==="") return;
-  let container=document.getElementById('botContainer');
-  container.innerHTML+=`<div><b>You:</b> ${input}</div>`;
-  document.getElementById('botInput').value='';
-  setTimeout(()=>{
-    let reply="SkillMint offers digital courses like Digital Marketing, Web Development, AI Tools, Graphic Designing, and Freelancing. You can buy courses from the Buy section.";
-    container.innerHTML+=`<div><b>Bot:</b> ${reply}</div>`;
-    container.scrollTop=container.scrollHeight;
-  },800);
+/* LOGIN */
+function saveLogin(){
+  let e=document.getElementById("email").value
+  let p=document.getElementById("pass").value
+  if(e && p){
+    localStorage.setItem("login",JSON.stringify({email:e,password:p}))
+    alert("Login saved (Demo only)")
+  }else alert("Fill email & password")
 }
 </script>
 
