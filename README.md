@@ -26,6 +26,9 @@ input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #
 .dark-mode{background:#121212;color:#fff;}
 .dark-mode .card{background:#1e1e1e;color:#fff;}
 .dark-mode input{background:#222;color:#fff;border:1px solid #444;}
+.carousel{overflow:hidden;height:100px;border-radius:12px;}
+.carousel-inner{display:flex;flex-direction:column;animation:scrollReviews 25s linear infinite;}
+@keyframes scrollReviews{0%{transform:translateY(0);}100%{transform:translateY(-100%);}}
 </style>
 </head>
 <body>
@@ -68,9 +71,7 @@ input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #
 
 <div id="reviews" class="card">
 <h3>Students Reviews</h3>
-<div style="overflow:hidden;height:100px;border-radius:10px;">
-<div id="reviewBox" style="display:flex;flex-direction:column;animation:scrollReviews 25s linear infinite;"></div>
-</div>
+<div class="carousel"><div id="reviewBox" class="carousel-inner"></div></div>
 </div>
 
 <div id="buy" class="card">
@@ -115,10 +116,7 @@ input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #
 </div>
 
 <script>
-// Scroll
 function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-
-// Buy
 let selected="";
 function buyCourse(name){selected=name;selectedCourse.innerText="Selected Course: "+name;scrollToSection('buy');}
 function pay(method){
@@ -139,15 +137,12 @@ else{verifyStatus.innerText="Verifying... "+t+"s";t--;localStorage.setItem("time
 proof.onchange=startTimer;
 openCourse.onclick=()=>alert("Course Opened: "+selected);
 
-// Reviews
 const reviews=["Best platform 👍","SkillMint changed my life ❤️","Courses are practical","Highly trusted","Earned my first income","Support helpful","Easy on mobile","Worth every rupee","Professional learning","Recommended"];
 function loadReviews(){let box=document.getElementById("reviewBox");box.innerHTML="";for(let i=0;i<25;i++){let r=reviews[Math.floor(Math.random()*reviews.length)];box.innerHTML+=`<div style="margin-bottom:4px;">⭐ ${r}</div>`;}}
 loadReviews();
 
-// Active users
 setInterval(()=>{document.getElementById("users").innerText=Math.floor(1200+Math.random()*800);},2000);
 
-// Chat
 let chatOpen=true;
 function toggleChat(){let body=document.getElementById("chatBody");let parent=body.parentElement;parent.style.height = chatOpen?"40px":"350px";chatOpen=!chatOpen;}
 async function sendMsg(){
@@ -158,8 +153,6 @@ let data=await response.json();let botText=data.choices?.[0]?.message?.content||
 let bodyDiv=document.getElementById("chatBody");bodyDiv.lastElementChild.innerHTML="<b>Bot:</b> "+botText;bodyDiv.scrollTop=bodyDiv.scrollHeight;
 }
 function addChat(sender,msg){let body=document.getElementById("chatBody");let div=document.createElement("div");div.innerHTML="<b>"+sender+":</b> "+msg;body.appendChild(div);body.scrollTop=body.scrollHeight;}
-
-// Dark mode
 function toggleDark(){document.body.classList.toggle("dark-mode");}
 </script>
 
