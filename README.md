@@ -1,66 +1,203 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SkillMint</title>
+<title>SkillMint Neon Dashboard</title>
 
 <style>
-:root{--grad:linear-gradient(135deg,#6366f1,#22c55e);}
-body{margin:0;font-family:system-ui,sans-serif;background:#eef2ff;color:#222;overflow-x:hidden;transition:all .3s}
-.dark{background:#0f172a;color:#e5e7eb}
-.hide{display:none}
+:root {
+  --neon-red: #ff3c78;
+  --neon-blue: #3c9eff;
+  --neon-purple: #b13eff;
+  --dark-bg: #0a0a0a;
+  --dark-card: #1c1c1c;
+  --white: #fff;
+}
+
+/* GENERAL */
+body{
+  margin:0;
+  font-family:system-ui,sans-serif;
+  background:var(--dark-bg);
+  color:var(--white);
+  overflow-x:hidden;
+  transition:all .3s;
+}
+.dark{background:#0f172a}
 
 /* SPLASH */
-#splash{position:fixed;inset:0;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;z-index:9999;transition:all .3s}
+#splash{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,var(--neon-purple),var(--neon-blue));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:26px;z-index:9999;transition:all .3s;
+}
 
 /* HEADER */
-.header{background:var(--grad);color:#fff;padding:16px;border-radius:0 0 26px 26px;text-align:center;position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(135deg,var(--neon-red),var(--neon-blue));
+  color:#fff;
+  padding:16px;
+  border-radius:0 0 26px 26px;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  position:sticky;top:0;z-index:9;
+}
 .header h2{margin:0;font-size:22px}
 .header-buttons{display:flex;gap:8px}
-.header button{background:#fff;color:#000;border:none;padding:6px 12px;border-radius:20px;cursor:pointer;transition:.3s}
-.header button:hover{opacity:.8}
+.header button{
+  background:#111;
+  color:var(--neon-red);
+  border:1px solid var(--neon-red);
+  padding:6px 12px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.3s;
+  font-weight:bold;
+}
+.header button:hover{
+  background:var(--neon-red);
+  color:#111;
+  box-shadow:0 0 12px var(--neon-red);
+}
 
 /* DASHBOARD */
-.dashboard{padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:14px}
-.icon{background:#fff;border-radius:18px;text-align:center;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.1);cursor:pointer;transition:.3s}
-.icon:hover{transform:translateY(-4px)}
+.dashboard{
+  padding:16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:14px;
+}
+.icon{
+  background:var(--dark-card);
+  border-radius:18px;
+  text-align:center;
+  padding:12px;
+  box-shadow:0 0 10px rgba(255,255,255,.1);
+  cursor:pointer;
+  transition:all .3s;
+  border:1px solid var(--neon-blue);
+}
+.icon:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 12px var(--neon-blue),0 0 20px var(--neon-red);
+}
 .icon img{width:44px}
-.icon span{font-size:11px;display:block;margin-top:6px}
+.icon span{font-size:11px;display:block;margin-top:6px;color:var(--white);font-weight:bold}
 
-/* DASHBOARD TIPS */
-#welcomeMsg{font-size:16px;font-weight:bold;margin-bottom:12px}
-#tipsBox{background:#fff;border-radius:16px;padding:12px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+/* USERNAME & TIPS BOX */
+#welcomeMsg{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:12px;
+  background:var(--dark-card);
+  padding:10px;
+  border-radius:12px;
+  border:1px solid var(--neon-red);
+  text-align:center;
+  box-shadow:0 0 8px var(--neon-red);
+}
+#tipsBox{
+  background:var(--dark-card);
+  border-radius:16px;
+  padding:12px;
+  margin-bottom:12px;
+  box-shadow:0 0 12px var(--neon-blue);
+  color:var(--neon-blue);
+}
 
 /* SECTIONS */
 .section{padding:14px;display:none;transition:all .3s}
-.card{background:#fff;border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.1);transition:all .3s}
+.card{
+  background:var(--dark-card);
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:14px;
+  box-shadow:0 0 12px var(--neon-purple);
+  transition:all .3s;
+}
 
 /* COURSES */
-.course{display:flex;gap:12px;align-items:center;transition:all .3s}
+.course{
+  display:flex;gap:12px;align-items:center;transition:all .3s;
+}
 .course img{width:90px;height:90px;border-radius:14px;object-fit:cover}
-.price{font-weight:bold;color:#22c55e}
+.price{font-weight:bold;color:var(--neon-red)}
 
-/* BUTTON */
-button{width:100%;border:none;padding:10px;border-radius:14px;background:var(--grad);color:#fff;font-size:14px;margin-top:8px;cursor:pointer;transition:.3s}
-button:hover{opacity:.85}
+/* BUTTONS */
+button{
+  width:100%;
+  border:none;
+  padding:10px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--neon-red),var(--neon-blue));
+  color:#fff;
+  font-size:14px;
+  margin-top:8px;
+  cursor:pointer;
+  transition:.3s;
+  font-weight:bold;
+}
+button:hover{opacity:.85;box-shadow:0 0 12px var(--neon-red)}
 
-/* REVIEWS */
-.slider{display:flex;gap:12px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:8px}
-.review{min-width:240px;background:#fff;border-radius:16px;padding:12px;box-shadow:0 4px 14px rgba(0,0,0,.1);transition:all .3s}
+/* REVIEWS SLIDER */
+.slider{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding-bottom:8px;
+}
+.review{
+  min-width:240px;
+  background:var(--dark-card);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 0 12px var(--neon-blue);
+}
 .review img{width:40px;height:40px;border-radius:50%}
 .review b{font-size:13px}
-.review p{margin:4px 0 0;font-size:12px;color:#555}
+.review p{margin:4px 0 0;font-size:12px;color:var(--white)}
 
 /* LOGIN */
-input,select{width:100%;padding:10px;border-radius:12px;border:1px solid #ccc;margin-top:8px}
+input,select{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid var(--neon-red);
+  margin-top:8px;
+  background:#111;
+  color:#fff;
+}
 
 /* BOTTOM NAV */
-.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;box-shadow:0 -4px 12px rgba(0,0,0,.2)}
-.nav div{text-align:center;font-size:11px;padding:6px;cursor:pointer;transition:.3s}
-.nav div:hover{opacity:.8}
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#111;
+  display:flex;
+  justify-content:space-around;
+  box-shadow:0 -4px 12px rgba(255,0,0,.3);
+}
+.nav div{
+  text-align:center;
+  font-size:11px;
+  padding:6px;
+  cursor:pointer;
+  color:var(--neon-blue);
+  font-weight:bold;
+  transition:.3s;
+}
+.nav div:hover{
+  color:var(--neon-red);
+}
 
 /* SCROLLBAR HIDE */
 .slider::-webkit-scrollbar{display:none}
-.copy-btn{cursor:pointer;color:#6366f1;font-weight:bold;font-size:12px;margin-left:4px}
+.copy-btn{cursor:pointer;color:var(--neon-red);font-weight:bold;font-size:12px;margin-left:4px}
 </style>
 </head>
 
@@ -140,65 +277,38 @@ input,select{width:100%;padding:10px;border-radius:12px;border:1px solid #ccc;ma
 
 <script>
 setTimeout(()=>splash.style.display="none",1200)
-
-/* DARK MODE */
 function toggleDark(){document.body.classList.toggle("dark")}
 
-/* LOGIN CHECK */
+/* LOGIN */
 function checkLogin(){
   let login=JSON.parse(localStorage.getItem("login"))
-  if(login && login.username){
-    loginSuccess()
-  }else{
-    loginScreen.style.display="block"
-    dashboard.style.display="none"
-    logoutBtn.style.display="none"
-  }
+  if(login && login.username){loginSuccess()}
+  else{loginScreen.style.display="block";dashboard.style.display="none";logoutBtn.style.display="none"}
 }
-
-/* LOGIN / SIGNUP */
 function saveLogin(){
   let u=document.getElementById("username").value
   let p=document.getElementById("password").value
-  if(u && p){
-    localStorage.setItem("login",JSON.stringify({username:u,password:p}))
-    alert("Login successful!")
-    loginSuccess()
-  }else alert("Enter username & password")
+  if(u && p){localStorage.setItem("login",JSON.stringify({username:u,password:p}));alert("Login successful!");loginSuccess()}
+  else alert("Enter username & password")
 }
-
 function loginSuccess(){
-  loginScreen.style.display="none"
-  dashboard.style.display="block"
-  logoutBtn.style.display="inline-block"
-  if(localStorage.getItem("lastSec")){
-    openSec(localStorage.getItem("lastSec"))
-  }
-  loadDashboard()
-  loadReviews()
-  showWelcomeTips()
-  loadChat()
+  loginScreen.style.display="none";dashboard.style.display="block";logoutBtn.style.display="inline-block"
+  if(localStorage.getItem("lastSec")) openSec(localStorage.getItem("lastSec"))
+  loadDashboard();loadReviews();showWelcomeTips();loadChat()
 }
-
-/* LOGOUT */
 function logout(){
-  localStorage.removeItem("login")
-  localStorage.removeItem("lastSec")
-  localStorage.removeItem("course")
-  localStorage.removeItem("chatHistory")
-  location.reload()
+  localStorage.removeItem("login");localStorage.removeItem("lastSec");localStorage.removeItem("course");localStorage.removeItem("chatHistory");location.reload()
 }
 
 /* SECTIONS */
 function openSec(id){
   if(!localStorage.getItem("login")) return alert("Please login first!")
   document.querySelectorAll('.section').forEach(s=>s.style.display="none")
-  if(id=="dashboard") dashboard.style.display="block"
-  else document.getElementById(id).style.display="block"
+  document.getElementById(id).style.display="block"
   localStorage.setItem("lastSec",id)
 }
 
-/* DASHBOARD RANDOM CARDS */
+/* DASHBOARD */
 function loadDashboard(){
   let dash=document.getElementById("dashCards")
   dash.innerHTML=""
@@ -216,139 +326,31 @@ function loadDashboard(){
   })
 }
 
-/* SHOW WELCOME + RANDOM TIPS */
+/* TIPS */
 function showWelcomeTips(){
   let login=JSON.parse(localStorage.getItem("login"))
   welcomeMsg.innerText="Welcome, "+login.username+"! 🎉"
-  let tips=[
-    "Learn digital skills & earn online 💻",
-    "Boost your freelancing career 🚀",
-    "Practical projects included 📝",
-    "Start earning in PKR & USD 💰",
-    "AI tools & modern skills 🧠",
-    "Flexible learning anytime ⏰",
-    "Trusted by thousands of students 🌟"
-  ]
+  let tips=["Learn digital skills & earn online 💻","Boost your freelancing career 🚀","Practical projects included 📝","Start earning in PKR & USD 💰","AI tools & modern skills 🧠","Flexible learning anytime ⏰","Trusted by thousands of students 🌟"]
   tipsBox.innerHTML=""
-  for(let i=0;i<3;i++){
-    let t=tips[Math.floor(Math.random()*tips.length)]
-    tipsBox.innerHTML+=`<p>• ${t}</p>`
-  }
+  for(let i=0;i<3;i++){let t=tips[Math.floor(Math.random()*tips.length)];tipsBox.innerHTML+=`<p>• ${t}</p>`}
 }
 
-/* SELECT COURSE FOR PAYMENT */
-function selectCourse(name,price){
-  localStorage.setItem("course",name)
-  document.getElementById("courseName").innerText=name
-  document.getElementById("coursePrice").innerText=price
-  openSec("payment")
-}
-
-/* PAYMENT NUMBER COPY & AUTO-FILL */
+/* COURSE PAYMENT */
+function selectCourse(name,price){localStorage.setItem("course",name);document.getElementById("courseName").innerText=name;document.getElementById("coursePrice").innerText=price;openSec("payment")}
 const payNumbers={JazzCash:"03001234567",EasyPaisa:"03101234567",Binance:"bc1qxyz..."}
-function updatePayNumber(){
-  let method=document.getElementById("payMethod").value
-  document.getElementById("payNumber").innerText=payNumbers[method]
-}
-function copyNumber(){
-  navigator.clipboard.writeText(document.getElementById("payNumber").innerText)
-  alert("Number copied!")
-}
-
-/* TIMER & COURSE UNLOCK */
-function startTimer(){
-  let file=document.getElementById("uploadProof").files[0]
-  let txn=document.getElementById("txnID").value
-  if(!file || !txn) return alert("Add Transaction ID and upload proof")
-  let t=180
-  localStorage.setItem("timer",t)
-  timer.innerText="Verifying payment: "+t+"s"
-  let x=setInterval(()=>{
-    t--
-    timer.innerText="Verifying payment: "+t+"s"
-    localStorage.setItem("timer",t)
-    if(t<=0){
-      clearInterval(x)
-      timer.innerText="✔ Course Unlocked"
-      alert("Course link activated!")
-      window.open("https://gtv140.github.io/SkillMint-complete-course-/","_blank")
-      localStorage.removeItem("timer")
-    }
-  },1000)
-}
+function updatePayNumber(){let method=document.getElementById("payMethod").value;document.getElementById("payNumber").innerText=payNumbers[method]}
+function copyNumber(){navigator.clipboard.writeText(document.getElementById("payNumber").innerText);alert("Number copied!")}
+function startTimer(){let file=document.getElementById("uploadProof").files[0];let txn=document.getElementById("txnID").value;if(!file||!txn)return alert("Add Transaction ID and upload proof");let t=180;localStorage.setItem("timer",t);timer.innerText="Verifying payment: "+t+"s";let x=setInterval(()=>{t--;timer.innerText="Verifying payment: "+t+"s";localStorage.setItem("timer",t);if(t<=0){clearInterval(x);timer.innerText="✔ Course Unlocked";alert("Course link activated!");window.open("https://gtv140.github.io/SkillMint-complete-course-/","_blank");localStorage.removeItem("timer")}},1000)}
 
 /* REVIEWS */
-let revs=[
-"SkillMint se earning start ho gayi 👍",
-"बहुत बढ़िया platform hai",
-"AI tools bohot helpful hain",
-"میں satisfied ہوں",
-"Real skills, real results",
-"Freelancing confidence mila",
-"Digital skills ne meri life change ki",
-"SkillMint ki wajah se paisa earn ho raha hai",
-"बहुत आसान और understandable",
-"Courses clear aur practical hain"
-]
-function loadReviews(){
-  let revBox=document.getElementById("revBox")
-  revBox.innerHTML=""
-  revs.forEach(r=>{
-    let img=Math.floor(Math.random()*70)
-    revBox.innerHTML+=`<div class="review"><img src="https://i.pravatar.cc/100?img=${img}"><p>${r}</p></div>`
-  })
-  setInterval(()=>revBox.scrollLeft+=260,2500)
-}
+let revs=["SkillMint se earning start ho gayi 👍","बहुत बढ़िया platform hai","AI tools bohot helpful hain","میں satisfied ہوں","Real skills, real results","Freelancing confidence mila","Digital skills ne meri life change ki","SkillMint ki wajah se paisa earn ho raha hai","बहुत आसान और understandable","Courses clear aur practical hain"]
+function loadReviews(){let revBox=document.getElementById("revBox");revBox.innerHTML="";revs.forEach(r=>{let img=Math.floor(Math.random()*70);revBox.innerHTML+=`<div class="review"><img src="https://i.pravatar.cc/100?img=${img}"><p>${r}</p></div>`});setInterval(()=>revBox.scrollLeft+=260,2500)}
 
-/* REAL AI BOT */
-const apiKey = "YOUR_API_KEY_HERE" // <- replace with your API key
-function loadChat(){
-  let history=JSON.parse(localStorage.getItem("chatHistory")||"[]")
-  chat.innerHTML=""
-  history.forEach(msg=>{
-    chat.innerHTML+=`<p><b>${msg.user}:</b> ${msg.text}</p>`
-    chat.innerHTML+=`<p><b>Bot:</b> ${msg.bot}</p>`
-  })
-  chat.scrollTop=chat.scrollHeight
-}
-
-async function ask(){
-  let qVal=q.value
-  if(!qVal) return
-  let history=JSON.parse(localStorage.getItem("chatHistory")||"[]")
-  chat.innerHTML+=`<p><b>You:</b> ${qVal}</p>`
-  // --- API CALL ---
-  try{
-    let res=await fetch("https://api.openai.com/v1/chat/completions",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":"Bearer "+apiKey
-      },
-      body:JSON.stringify({
-        model:"gpt-3.5-turbo",
-        messages:[{role:"user",content:qVal}]
-      })
-    })
-    let data=await res.json()
-    let answer=data.choices[0].message.content
-    chat.innerHTML+=`<p><b>Bot:</b> ${answer}</p>`
-    history.push({user:qVal,bot:answer})
-    localStorage.setItem("chatHistory",JSON.stringify(history))
-    chat.scrollTop=chat.scrollHeight
-  }catch(e){
-    chat.innerHTML+=`<p><b>Bot:</b> Error fetching response</p>`
-  }
-  q.value=""
-}
-
-/* CLEAR CHAT */
-function clearChat(){
-  if(confirm("Clear chat history?")){
-    localStorage.removeItem("chatHistory")
-    chat.innerHTML=""
-  }
-}
+/* AI BOT */
+const apiKey = "YOUR_API_KEY_HERE"
+function loadChat(){let history=JSON.parse(localStorage.getItem("chatHistory")||"[]");chat.innerHTML="";history.forEach(msg=>{chat.innerHTML+=`<p><b>${msg.user}:</b> ${msg.text}</p>`;chat.innerHTML+=`<p><b>Bot:</b> ${msg.bot}</p>`});chat.scrollTop=chat.scrollHeight}
+async function ask(){let qVal=q.value;if(!qVal)return;let history=JSON.parse(localStorage.getItem("chatHistory")||"[]");chat.innerHTML+=`<p><b>You:</b> ${qVal}</p>`;try{let res=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+apiKey},body:JSON.stringify({model:"gpt-3.5-turbo",messages:[{role:"user",content:qVal}]})});let data=await res.json();let answer=data.choices[0].message.content;chat.innerHTML+=`<p><b>Bot:</b> ${answer}</p>`;history.push({user:qVal,bot:answer});localStorage.setItem("chatHistory",JSON.stringify(history));chat.scrollTop=chat.scrollHeight}catch(e){chat.innerHTML+=`<p><b>Bot:</b> Error fetching response</p>`}q.value=""}
+function clearChat(){if(confirm("Clear chat history?")){localStorage.removeItem("chatHistory");chat.innerHTML=""}}
 
 /* INIT */
 checkLogin()
