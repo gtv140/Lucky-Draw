@@ -4,85 +4,28 @@
 <title>SkillMint – Learn & Earn Skills</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#f4f7fb;
-color:#222;
-}
-
-header{
-background:linear-gradient(135deg,#0f9d58,#0b7d46);
-color:#fff;
-padding:20px;
-text-align:center;
-}
-
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#222;padding-bottom:120px;}
+header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:20px;text-align:center;}
 header h1{margin:0;font-size:26px}
 header p{margin:5px 0;font-size:14px}
-
 .container{padding:15px}
-
-.card{
-background:#fff;
-border-radius:12px;
-padding:15px;
-margin-bottom:15px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.icons{
-display:flex;
-justify-content:space-around;
-text-align:center;
-margin-bottom:12px;
-}
-
-.icon{
-cursor:pointer;
-font-size:13px;
-}
-
-.icon img{
-width:42px;
-margin-bottom:6px;
-}
-
+.card{background:#fff;border-radius:12px;padding:15px;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,0,0,0.08);}
+.icons{display:flex;justify-content:space-around;text-align:center;margin-bottom:12px;}
+.icon{cursor:pointer;font-size:13px;}
+.icon img{width:42px;margin-bottom:6px;}
 .hidden{display:none}
-
-button{
-background:#0f9d58;
-color:#fff;
-border:none;
-padding:10px 15px;
-border-radius:8px;
-cursor:pointer;
-font-size:14px;
-}
-
+button{background:#0f9d58;color:#fff;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;font-size:14px;margin-top:5px;}
 button:hover{opacity:.9}
-
-.course{
-display:flex;
-gap:10px;
-align-items:center;
-margin-bottom:12px;
-}
-
-.course img{
-width:80px;
-border-radius:8px;
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:6px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
+.course{display:flex;gap:10px;align-items:center;margin-bottom:12px;}
+.course img{width:80px;border-radius:8px;}
+input{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid #ccc;}
 #verifyStatus{font-size:13px;margin-top:5px;color:green;}
+#chatbot{position:fixed;bottom:20px;right:20px;width:300px;background:#fff;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column;height:400px;}
+#chatHeader{background:#0f9d58;color:#fff;padding:10px;text-align:center;cursor:pointer;}
+#chatBody{flex:1;padding:10px;overflow-y:auto;}
+#chatInput{display:flex;border-top:1px solid #ccc;}
+#chatInput input{flex:1;padding:8px;border:none}
+#chatInput button{padding:8px;background:#0f9d58;color:#fff;border:none;cursor:pointer;}
 </style>
 </head>
 
@@ -106,23 +49,19 @@ karte hain jo real market demand par based hote hain.
 
 <div class="card icons">
 <div class="icon" onclick="openSection('courses')">
-<img src="https://img.icons8.com/fluency/96/online-course.png">
-Courses
+<img src="https://img.icons8.com/fluency/96/online-course.png">Courses
 </div>
 
 <div class="icon" onclick="openSection('reviews')">
-<img src="https://img.icons8.com/fluency/96/star.png">
-Reviews
+<img src="https://img.icons8.com/fluency/96/star.png">Reviews
 </div>
 
 <div class="icon" onclick="openSection('buy')">
-<img src="https://img.icons8.com/fluency/96/credit-card.png">
-Buy Course
+<img src="https://img.icons8.com/fluency/96/credit-card.png">Buy Course
 </div>
 
 <div class="icon" onclick="openSection('more')">
-<img src="https://img.icons8.com/fluency/96/menu.png">
-More
+<img src="https://img.icons8.com/fluency/96/menu.png">More
 </div>
 </div>
 
@@ -195,6 +134,16 @@ More
 </p>
 </div>
 
+</div>
+
+<!-- CHATBOT -->
+<div id="chatbot">
+<div id="chatHeader" onclick="toggleChat()">💬 Chat with us</div>
+<div id="chatBody"></div>
+<div id="chatInput">
+<input type="text" id="userMsg" placeholder="Type your question...">
+<button onclick="sendMsg()">Send</button>
+</div>
 </div>
 
 <script>
@@ -271,6 +220,31 @@ loadReviews();
 setInterval(()=>{
 document.getElementById("users").innerText=Math.floor(1200+Math.random()*800);
 },2000);
+
+// CHATBOT
+const faq={
+"how to buy course":"Click the course, select payment method, upload proof, then open course.",
+"what is skillmint":"SkillMint is a trusted online platform to learn skills & earn online.",
+"how to pay":"You can pay via JazzCash, EasyPaisa or Binance.",
+"contact":"Email: Rock.earn92@gmail.com | FB & IG links available on More section.",
+"who can join":"Anyone who wants to learn and earn online."
+};
+
+function toggleChat(){
+let body=document.getElementById("chatBody");
+body.parentElement.style.height = body.parentElement.style.height==='400px'?'40px':'400px';
+}
+
+function sendMsg(){
+let msg=document.getElementById("userMsg").value.trim();
+if(msg==="") return;
+let body=document.getElementById("chatBody");
+body.innerHTML+=`<div><b>You:</b> ${msg}</div>`;
+let answer=faq[msg.toLowerCase()]||"Sorry, I don't understand. Try another question.";
+body.innerHTML+=`<div><b>Bot:</b> ${answer}</div>`;
+body.scrollTop=body.scrollHeight;
+document.getElementById("userMsg").value="";
+}
 </script>
 
 </body>
