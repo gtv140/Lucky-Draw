@@ -3,13 +3,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SkillMint</title>
 <style>
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f4f6fa;color:#222;}
-header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:22px 16px;text-align:center;border-bottom-left-radius:22px;border-bottom-right-radius:22px;}
-header h1{margin:0;font-size:22px;}
-header p{margin:6px 0 0;font-size:13px;opacity:.9;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:#f0f4ff;color:#222;}
+header{background:linear-gradient(135deg,#6a11cb,#2575fc);color:#fff;padding:20px 16px;text-align:center;border-bottom-left-radius:20px;border-bottom-right-radius:20px;}
+header h1{margin:0;font-size:24px;}
+header p{margin:5px 0 0;font-size:13px;opacity:.9;}
 .container{padding:12px;}
-
-/* Card */
 .card{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,0.08);transition:transform 0.3s;}
 .card:hover{transform:scale(1.02);}
 
@@ -20,44 +18,30 @@ header p{margin:6px 0 0;font-size:13px;opacity:.9;}
 
 /* Courses grid */
 .course-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;}
-.course-item{flex:1 1 30%;min-width:100px;}
+.course-item{flex:1 1 45%;min-width:100px;}
 .course-item img{border-radius:10px;width:100%;}
 
 /* Reviews */
-.review-box{overflow:hidden;height:120px;border-radius:12px;}
+.review-box{overflow:hidden;height:120px;border-radius:12px;background:#eef0ff;padding:6px;}
 .review-inner{display:flex;flex-direction:column;animation:scrollReviews 25s linear infinite;}
 @keyframes scrollReviews{0%{transform:translateY(0);}100%{transform:translateY(-100%);}}
 
 /* Buttons & Inputs */
-button{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;border:none;padding:10px 12px;border-radius:10px;cursor:pointer;margin-top:6px;width:100%;}
+button{background:linear-gradient(135deg,#6a11cb,#2575fc);color:#fff;border:none;padding:10px 12px;border-radius:10px;cursor:pointer;margin-top:6px;width:100%;}
 button:hover{opacity:.9;}
 input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #ccc;}
 
 /* Chatbot */
 #chatbot{position:fixed;bottom:70px;right:10px;width:90%;max-width:300px;background:#fff;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.3);display:flex;flex-direction:column;height:350px;z-index:999;}
-#chatHeader{background:#0f9d58;color:#fff;padding:10px;text-align:center;cursor:pointer;font-size:14px;border-top-left-radius:16px;border-top-right-radius:16px;}
+#chatHeader{background:#6a11cb;color:#fff;padding:10px;text-align:center;cursor:pointer;font-size:14px;border-top-left-radius:16px;border-top-right-radius:16px;}
 #chatBody{flex:1;padding:8px;overflow-y:auto;font-size:13px;}
 #chatInput{display:flex;border-top:1px solid #ccc;}
 #chatInput input{flex:1;padding:6px;border:none;font-size:13px;}
-#chatInput button{padding:6px;background:#0f9d58;color:#fff;border:none;cursor:pointer;font-size:13px;}
+#chatInput button{padding:6px;background:#6a11cb;color:#fff;border:none;cursor:pointer;font-size:13px;}
 
 /* Bottom Navbar */
 .nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -4px 12px rgba(0,0,0,0.15);z-index:999;}
 .nav a{text-align:center;font-size:10px;color:#222;text-decoration:none;flex:1;}
-
-/* Dark mode */
-.dark-mode{background:#121212;color:#fff;}
-.dark-mode .card{background:#1e1e1e;color:#fff;}
-.dark-mode input{background:#222;color:#fff;border:1px solid #444;}
-
-/* Carousel */
-.carousel{overflow:hidden;height:140px;border-radius:12px;margin-bottom:14px;position:relative;}
-.carousel-inner{display:flex;width:300%;animation:slide 12s infinite;}
-.carousel-inner img{width:100%;flex-shrink:0;border-radius:12px;}
-@keyframes slide{0%,33%{transform:translateX(0);}33%,66%{transform:translateX(-33.33%);}66%,100%{transform:translateX(-66.66%);}}
-
-/* Section titles */
-.card h3{margin-top:0;}
 </style>
 </head>
 <body>
@@ -68,21 +52,6 @@ input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #
 </header>
 
 <div class="container">
-
-<!-- Banner -->
-<div class="carousel">
-<div class="carousel-inner">
-<img src="https://picsum.photos/400/140?1">
-<img src="https://picsum.photos/400/140?2">
-<img src="https://picsum.photos/400/140?3">
-</div>
-</div>
-
-<!-- About -->
-<div class="card">
-<h3>About SkillMint</h3>
-<p>SkillMint ek modern mobile app style platform hai jahan students real skills seekh kar online earning start karte hain. Trusted aur easy learning experience with real results.</p>
-</div>
 
 <!-- Icons -->
 <div class="card icons">
@@ -137,7 +106,6 @@ input{width:100%;padding:8px;margin-top:6px;border-radius:8px;border:1px solid #
 <p>Email: Rock.earn92@gmail.com</p>
 <p>👥 Active Users: <b id="users"></b></p>
 <p><a href="https://www.facebook.com/profile.php?id=100084218946114">Facebook</a> | <a href="https://www.instagram.com/mr_nazim073">Instagram</a></p>
-<button onclick="toggleDark()">Toggle Dark Mode</button>
 </div>
 
 </div>
@@ -182,9 +150,8 @@ setInterval(()=>{document.getElementById("users").innerText=Math.floor(1200+Math
 
 // Chatbot
 let chatOpen=true;function toggleChat(){let body=document.getElementById("chatBody");let parent=body.parentElement;parent.style.height=chatOpen?"40px":"350px";chatOpen=!chatOpen;}
-async function sendMsg(){let input=document.getElementById("userMsg");let text=input.value.trim();if(!text)return;addChat("You",text);input.value="";addChat("Bot","Typing...");}
+function sendMsg(){let input=document.getElementById("userMsg");let text=input.value.trim();if(!text)return;addChat("You",text);input.value="";addChat("Bot","Typing...");}
 function addChat(sender,msg){let body=document.getElementById("chatBody");let div=document.createElement("div");div.innerHTML="<b>"+sender+":</b> "+msg;body.appendChild(div);body.scrollTop=body.scrollHeight;}
-function toggleDark(){document.body.classList.toggle("dark-mode");}
 </script>
 
 </body>
