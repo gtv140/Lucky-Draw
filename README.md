@@ -19,14 +19,11 @@ body{margin:0;font-family:system-ui,sans-serif;background:#eef2ff;color:#222;ove
 /* SECTIONS */
 .section{display:none;padding:14px;}
 .card{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);}
-/* REVIEWS */
 .review{display:flex;gap:10px;margin-bottom:12px;}
 .review img{width:42px;height:42px;border-radius:50%;}
 .review b{font-size:13px;}
 .review p{margin:2px 0 0;font-size:12px;color:#555;}
-/* BUTTON */
-button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#22c55e);color:#fff;font-size:14px;margin-top:6px;}
-/* BOTTOM NAV */
+button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-gradient(135deg,#6366f1,#22c55e);color:#fff;font-size:14px;margin-top:6px;cursor:pointer;}
 .nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -4px 12px rgba(0,0,0,.15);z-index:999;}
 .nav a{text-decoration:none;font-size:11px;color:#222;text-align:center;flex:1;transition:all .2s;}
 .nav a.active{color:#22c55e;font-weight:bold;transform:translateY(-2px);}
@@ -41,7 +38,6 @@ button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-
 <p>Trusted Digital Skills Platform</p>
 </div>
 
-<!-- DASHBOARD -->
 <div class="dashboard">
   <div class="icon" onclick="openSec('courses',this)">
     <img src="https://img.icons8.com/fluency/96/online-course.png">
@@ -61,7 +57,6 @@ button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-
   </div>
 </div>
 
-<!-- COURSES -->
 <div id="courses" class="section">
   <div class="card">
     <h3>Available Courses</h3>
@@ -70,7 +65,6 @@ button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-
   </div>
 </div>
 
-<!-- REVIEWS -->
 <div id="reviews" class="section">
   <div class="card">
     <h3>Student Reviews</h3>
@@ -78,25 +72,25 @@ button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-
   </div>
 </div>
 
-<!-- BUY -->
 <div id="buy" class="section">
   <div class="card">
     <h3>Payment</h3>
     <p>JazzCash / EasyPaisa / Binance supported</p>
-    <button>Proceed to Payment</button>
+    <p>Deposit Number: <b id="depositNum">03705519562</b></p>
+    <button onclick="startTimer()">Start Verification</button>
+    <p id="verifyStatus"></p>
   </div>
 </div>
 
-<!-- ABOUT -->
 <div id="contact" class="section">
   <div class="card">
     <h3>About SkillMint</h3>
     <p>SkillMint is a trusted platform helping students learn digital skills & earn online.</p>
     <p>Email: Rock.earn92@gmail.com</p>
+    <p>👥 Active Users: <b id="users">1200</b></p>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="nav">
   <a href="#" class="active">🏠<br>Home</a>
   <a onclick="openSec('courses',null)">🎓<br>Courses</a>
@@ -105,22 +99,17 @@ button{width:100%;border:none;padding:10px;border-radius:12px;background:linear-
 </div>
 
 <script>
-/* SPLASH SCREEN */
 setTimeout(()=>document.getElementById('splash').style.display='none',1500);
 
-/* DASHBOARD & ICON ACTIVE */
 function openSec(id,el){
   document.querySelectorAll('.section').forEach(s=>s.style.display='none');
   document.getElementById(id).style.display='block';
-  if(el){
-    document.querySelectorAll('.icon').forEach(ic=>ic.classList.remove('active'));
-    el.classList.add('active');
-  }
+  if(el){document.querySelectorAll('.icon').forEach(ic=>ic.classList.remove('active'));el.classList.add('active');}
   window.scrollTo({top:0,behavior:'smooth'});
   document.querySelectorAll('.nav a').forEach(nav=>nav.classList.remove('active'));
 }
 
-/* FAKE REVIEWS */
+// Fake Reviews
 const names=["Ali Khan","Ayesha Malik","Usman Raza","Hina Shaikh","Bilal Ahmed","Zain Abbas","Maria Noor","Saad Iqbal","Sana Fatima","Hamza Qureshi","Rabia Aslam","Omer Farooq","Nimra Zahid","Hassan Ali","Laiba Khan","Arslan Butt","Iqra Javed","Shahzaib Tariq","Maham Rehman","Danish Akhtar","Fiza Noor","Kashif Mehmood","Anum Saleem","Taha Rauf","Mehwish Ali"];
 function loadReviews(){
   let box=document.getElementById("reviewList"); box.innerHTML="";
@@ -131,6 +120,29 @@ function loadReviews(){
   }
 }
 loadReviews();
+
+// Countdown + Local Storage
+let timerInterval;
+function startTimer(){
+  let t = parseInt(localStorage.getItem('timer')) || 60;
+  document.getElementById('verifyStatus').innerText='Verifying: '+t+'s';
+  clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    t--;
+    document.getElementById('verifyStatus').innerText='Verifying: '+t+'s';
+    localStorage.setItem('timer',t);
+    if(t<=0){clearInterval(timerInterval);document.getElementById('verifyStatus').innerText='Payment Verified ✔';localStorage.removeItem('timer');}
+  },1000);
+}
+
+// Active Users Live + Local Storage
+function updateUsers(){
+  let users = parseInt(localStorage.getItem('users')) || 1200;
+  users += Math.floor(Math.random()*5);
+  document.getElementById('users').innerText=users;
+  localStorage.setItem('users',users);
+}
+setInterval(updateUsers,2000);
 </script>
 
 </body>
