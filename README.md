@@ -3,18 +3,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkillMint – Learn & Earn Skills</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#222;padding-bottom:120px;}
-header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:15px;text-align:center;}
-header h1{margin:0;font-size:22px}
-header p{margin:4px 0;font-size:12px}
-.container{padding:10px}
-.card{background:#fff;border-radius:10px;padding:12px;margin-bottom:12px;box-shadow:0 3px 8px rgba(0,0,0,0.08);}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#222;padding-bottom:120px;scroll-behavior:smooth;}
+header{background:linear-gradient(135deg,#0f9d58,#0b7d46);color:#fff;padding:18px;text-align:center;}
+header h1{margin:0;font-size:22px;}
+header p{margin:4px 0;font-size:12px;}
+.container{padding:12px;}
+.card{background:#fff;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 4px 12px rgba(0,0,0,0.08);}
 .icons{display:flex;flex-wrap:wrap;justify-content:space-around;text-align:center;margin-bottom:10px;}
-.icon{cursor:pointer;font-size:12px;width:22%;margin-bottom:10px;}
+.icon{cursor:pointer;font-size:12px;width:22%;margin-bottom:10px;transition:transform .2s;}
 .icon img{width:36px;margin-bottom:4px;}
+.icon:hover{transform:scale(1.1);}
 .hidden{display:none;}
 button{background:#0f9d58;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:13px;margin-top:4px;}
-button:hover{opacity:.9}
+button:hover{opacity:.9;}
 .course{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;}
 .course img{width:70px;border-radius:6px;}
 input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #ccc;}
@@ -28,6 +29,9 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 .nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 10px rgba(0,0,0,0.15);}
 .nav a{text-align:center;font-size:10px;color:#222;text-decoration:none;flex:1;}
 .review{margin-bottom:4px;}
+.carousel{overflow:hidden;height:90px;}
+.carousel-inner{display:flex;flex-direction:column;animation:scrollReviews 20s linear infinite;}
+@keyframes scrollReviews{0%{transform:translateY(0);}100%{transform:translateY(-100%);}}
 .dark-mode{background:#121212;color:#fff;}
 .dark-mode .card{background:#1e1e1e;color:#fff;}
 </style>
@@ -47,21 +51,22 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 </div>
 
 <div class="card icons">
-<div class="icon" onclick="openSection('courses')">
+<div class="icon" onclick="scrollToSection('courses')">
 <img src="https://img.icons8.com/fluency/96/online-course.png">Courses
 </div>
-<div class="icon" onclick="openSection('reviews')">
+<div class="icon" onclick="scrollToSection('reviews')">
 <img src="https://img.icons8.com/fluency/96/star.png">Reviews
 </div>
-<div class="icon" onclick="openSection('buy')">
+<div class="icon" onclick="scrollToSection('buy')">
 <img src="https://img.icons8.com/fluency/96/credit-card.png">Buy
 </div>
-<div class="icon" onclick="openSection('more')">
+<div class="icon" onclick="scrollToSection('more')">
 <img src="https://img.icons8.com/fluency/96/menu.png">More
 </div>
 </div>
 
-<div id="courses" class="card hidden">
+<!-- COURSES -->
+<div id="courses" class="card">
 <h3>Popular Courses</h3>
 <div class="course">
 <img src="https://picsum.photos/200?1">
@@ -77,12 +82,14 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 </div>
 </div>
 
-<div id="reviews" class="card hidden">
+<!-- REVIEWS -->
+<div id="reviews" class="card">
 <h3>Students Reviews</h3>
-<div id="reviewBox"></div>
+<div class="carousel"><div id="reviewBox" class="carousel-inner"></div></div>
 </div>
 
-<div id="buy" class="card hidden">
+<!-- BUY -->
+<div id="buy" class="card">
 <h3>Buy Course</h3>
 <p id="selectedCourse" style="font-weight:bold"></p>
 <label>Deposit Number</label>
@@ -96,7 +103,8 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 <button id="openCourse" disabled>Open Course</button>
 </div>
 
-<div id="more" class="card hidden">
+<!-- MORE -->
+<div id="more" class="card">
 <h3>Contact & Trust</h3>
 <p>👥 Active Users: <b id="users"></b></p>
 <p>Email: <b>Rock.earn92@gmail.com</b></p>
@@ -109,6 +117,7 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 
 </div>
 
+<!-- CHATBOT -->
 <div id="chatbot">
 <div id="chatHeader" onclick="toggleChat()">💬 AI Chat</div>
 <div id="chatBody"></div>
@@ -127,19 +136,12 @@ input{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #
 </div>
 
 <script>
-// ICONS
-function openSection(id){
-document.querySelectorAll('.card.hidden').forEach(x=>x.style.display='none');
-document.getElementById(id).style.display='block';
-}
+// SCROLL TO SECTION
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 
 // BUY FLOW
 let selected="";
-function buyCourse(name){
-selected=name;
-selectedCourse.innerText="Selected Course: "+name;
-openSection('buy');
-}
+function buyCourse(name){selected=name;selectedCourse.innerText="Selected Course: "+name;scrollToSection('buy');}
 function pay(method){
 let num={jazz:"03705519562",easy:"03379827882",binance:"0xBfB9E5b2baA8202850DfFb2CB1D739278b83f47F"}[method];
 number.value=num;
@@ -158,7 +160,7 @@ else{verifyStatus.innerText="Verifying... "+t+"s";t--;localStorage.setItem("time
 proof.onchange=startTimer;
 openCourse.onclick=()=>alert("Course Opened: "+selected);
 
-// REVIEWS
+// REVIEWS CAROUSEL
 const reviews=["Best platform 👍","SkillMint changed my life ❤️","Courses are very practical","Highly trusted website","I earned my first income","Support team is helpful","Easy to use on mobile","Worth every rupee","Professional learning","Recommended to all students"];
 function loadReviews(){let box=document.getElementById("reviewBox");box.innerHTML="";for(let i=0;i<25;i++){let r=reviews[Math.floor(Math.random()*reviews.length)];box.innerHTML+=`<div class="review">⭐ ${r}</div>`;}}
 loadReviews();
@@ -166,7 +168,7 @@ loadReviews();
 // ACTIVE USERS
 setInterval(()=>{document.getElementById("users").innerText=Math.floor(1200+Math.random()*800);},2000);
 
-// CHATBOT AI
+// CHATBOT
 let chatOpen=true;
 function toggleChat(){let body=document.getElementById("chatBody");let parent=body.parentElement;parent.style.height = chatOpen?"40px":"380px";chatOpen=!chatOpen;}
 async function sendMsg(){
