@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Future Pro Hub</title>
+<meta name="description" content="Future Pro Hub - Modern Portfolio, Skills, Interactive Tools, and Freelance Hub">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 
@@ -56,7 +57,7 @@ body.dark footer{background:#1e293b;}
 
 <header>
   <h1>Future Pro Hub</h1>
-  <p>Modern Interactive Portfolio & Skill Hub</p>
+  <p>Modern Interactive Portfolio & Freelance Hub</p>
   <div class="toggle-container">
     <input type="checkbox" id="darkToggle">
     <label for="darkToggle"></label>
@@ -70,25 +71,31 @@ body.dark footer{background:#1e293b;}
   <a href="#contact">Contact</a>
 </nav>
 
+<!-- Hero Section with real image -->
+<section id="hero" style="text-align:center;margin-bottom:60px;">
+  <img src="https://images.unsplash.com/photo-1590608897129-79b2895e1d0c?fit=crop&w=1200&q=80" alt="Hero Image" style="width:100%;max-height:400px;object-fit:cover;border-radius:15px;margin-bottom:20px;">
+  <h2>Build, Track & Earn – All in One Platform</h2>
+</section>
+
 <section id="services">
-  <h2>🚀 My Services</h2>
+  <h2>🚀 Our Services</h2>
   <div class="cards">
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Web+Dev" alt="Web Dev">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=400&q=80" alt="Web Dev">
       <h3>Web Development</h3>
-      <p>Build responsive, modern websites for clients.</p>
+      <p>We create modern, responsive websites ready for clients & freelancers.</p>
       <button onclick="gainPoints(5)">Hire Me (+5 points)</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=UI+UX+Design" alt="UI UX">
+      <img src="https://images.unsplash.com/photo-1581091870620-7a0d11b4ff7f?fit=crop&w=400&q=80" alt="UI UX">
       <h3>UI/UX Design</h3>
-      <p>Design sleek, user-friendly interfaces for apps & websites.</p>
+      <p>Sleek, interactive interface designs for web & mobile applications.</p>
       <button onclick="gainPoints(5)">Hire Me (+5 points)</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Freelance+Consult" alt="Consulting">
+      <img src="https://images.unsplash.com/photo-1581091012184-dc3f0f4bda38?fit=crop&w=400&q=80" alt="Consulting">
       <h3>Freelance Consulting</h3>
-      <p>Guide freelancers to earn online & showcase work.</p>
+      <p>Guiding freelancers to earn online & grow their career.</p>
       <button onclick="gainPoints(5)">Consult (+5 points)</button>
     </div>
   </div>
@@ -98,22 +105,22 @@ body.dark footer{background:#1e293b;}
   <h2>💼 Portfolio</h2>
   <div class="cards">
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Project+1" alt="Project 1">
+      <img src="https://images.unsplash.com/photo-1581091012184-dc3f0f4bda38?fit=crop&w=400&q=80" alt="Project 1">
       <h3>Project 1</h3>
       <p>Responsive website with modern UI & client-ready design.</p>
-      <button onclick="alert('View Project!')">View</button>
+      <button onclick="alert('Viewing Project 1')">View Project</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Project+2" alt="Project 2">
+      <img src="https://images.unsplash.com/photo-1581091870620-7a0d11b4ff7f?fit=crop&w=400&q=80" alt="Project 2">
       <h3>Project 2</h3>
-      <p>Interactive dashboard for analytics & productivity.</p>
-      <button onclick="alert('View Project!')">View</button>
+      <p>Interactive dashboard for productivity & analytics.</p>
+      <button onclick="alert('Viewing Project 2')">View Project</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=400&q=80" alt="Project 3">
       <h3>Project 3</h3>
       <p>Freelance platform prototype with earning features.</p>
-      <button onclick="alert('View Project!')">View</button>
+      <button onclick="alert('Viewing Project 3')">View Project</button>
     </div>
   </div>
 </section>
@@ -122,7 +129,7 @@ body.dark footer{background:#1e293b;}
   <h2>🛠 Mini Tools</h2>
   <div class="cards">
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Expense+Tracker" alt="Expense Tracker">
+      <img src="https://images.unsplash.com/photo-1581091012184-dc3f0f4bda38?fit=crop&w=400&q=80" alt="Expense Tracker">
       <h3>Expense Tracker</h3>
       <input type="number" id="income" placeholder="Enter Income">
       <input type="number" id="expense" placeholder="Enter Expense">
@@ -130,7 +137,7 @@ body.dark footer{background:#1e293b;}
       <p id="expenseResult"></p>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Habit+Tracker" alt="Habit Tracker">
+      <img src="https://images.unsplash.com/photo-1581091870620-7a0d11b4ff7f?fit=crop&w=400&q=80" alt="Habit Tracker">
       <h3>Habit Tracker</h3>
       <input type="text" id="habit" placeholder="Enter Habit">
       <button onclick="addHabit()">Add Habit</button>
@@ -143,22 +150,22 @@ body.dark footer{background:#1e293b;}
   <h2>📩 Contact Me</h2>
   <div class="cards">
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Email" alt="Email">
+      <img src="https://images.unsplash.com/photo-1581091012184-dc3f0f4bda38?fit=crop&w=400&q=80" alt="Email">
       <h3>Email</h3>
       <p>yourname@example.com</p>
-      <button onclick="alert('Send Email!')">Send</button>
+      <button onclick="alert('Send Email!')">Send Email</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=LinkedIn" alt="LinkedIn">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?fit=crop&w=400&q=80" alt="LinkedIn">
       <h3>LinkedIn</h3>
       <p>linkedin.com/in/yourprofile</p>
-      <button onclick="alert('Visit LinkedIn!')">Visit</button>
+      <button onclick="alert('Visit LinkedIn!')">Visit LinkedIn</button>
     </div>
     <div class="card">
-      <img src="https://via.placeholder.com/400x200?text=Portfolio" alt="Portfolio">
+      <img src="https://images.unsplash.com/photo-1581091870620-7a0d11b4ff7f?fit=crop&w=400&q=80" alt="Portfolio">
       <h3>Portfolio</h3>
-      <p>Full project showcase.</p>
-      <button onclick="alert('View Portfolio!')">View</button>
+      <p>View all my projects & work.</p>
+      <button onclick="alert('View Portfolio!')">View Portfolio</button>
     </div>
   </div>
 </section>
@@ -171,35 +178,26 @@ body.dark footer{background:#1e293b;}
 let points = 0;
 const toggle = document.getElementById('darkToggle');
 toggle.addEventListener('change',()=>{document.body.classList.toggle('dark');});
-
-function gainPoints(p){
-  points += p;
-  alert('Points: ' + points);
-}
-
-// Expense Tracker
+function gainPoints(p){points+=p;alert('Points: '+points);}
 function trackExpense(){
-  let inc = Number(document.getElementById('income').value);
-  let exp = Number(document.getElementById('expense').value);
-  if(!isNaN(inc) && !isNaN(exp)){
-    let balance = inc - exp;
-    document.getElementById('expenseResult').innerText = 'Balance: ' + balance;
+  let inc=Number(document.getElementById('income').value);
+  let exp=Number(document.getElementById('expense').value);
+  if(!isNaN(inc)&&!isNaN(exp)){
+    let balance=inc-exp;
+    document.getElementById('expenseResult').innerText='Balance: '+balance;
     gainPoints(1);
-  } else { alert('Enter valid numbers'); }
+  }else{alert('Enter valid numbers');}
 }
-
-// Habit Tracker
 function addHabit(){
-  let habit = document.getElementById('habit').value;
+  let habit=document.getElementById('habit').value;
   if(habit){
-    let li = document.createElement('li');
-    li.innerText = habit;
+    let li=document.createElement('li');
+    li.innerText=habit;
     document.getElementById('habitList').appendChild(li);
-    document.getElementById('habit').value = '';
+    document.getElementById('habit').value='';
     gainPoints(1);
   }
 }
 </script>
-
 </body>
 </html>
