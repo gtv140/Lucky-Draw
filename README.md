@@ -1,42 +1,25 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2D Video Games Hub</title>
+<title>Future-Ready Game Hub</title>
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#020617;
-  color:white;
-  text-align:center;
-}
-button{
-  padding:10px 20px;
-  margin:5px;
-  font-size:16px;
-}
-canvas{
-  background:#111;
-  display:block;
-  margin:auto;
-}
+body{margin:0;font-family:Arial;background:#020617;color:white;text-align:center;}
+button{padding:10px 20px;margin:5px;font-size:16px;}
+canvas{background:#111;display:block;margin:auto;}
 .game{display:none;}
-#ball{
-  width:50px;height:50px;
-  background:red;border-radius:50%;
-  position:absolute;
-}
+#ball{width:50px;height:50px;background:red;border-radius:50%;position:absolute;}
 </style>
 </head>
 <body>
 
-<h1>🎮 2D Video Games Hub</h1>
+<h1>🌟 Future-Ready Game Hub</h1>
 <div id="menu">
   <button onclick="show('game1')">Catch The Ball</button>
-  <button onclick="show('game2')">Tap Speed</button>
+  <button onclick="show('game2')">Tap Challenge</button>
   <button onclick="show('game3')">Guess Number</button>
-  <button onclick="show('game4')">Endless Runner</button>
+  <button onclick="show('game4')">Math Quiz</button>
   <button onclick="show('game5')">Car Racing</button>
+  <p>Points: <span id="points">0</span></p>
 </div>
 
 <!-- Game 1: Catch The Ball -->
@@ -47,9 +30,9 @@ canvas{
   <button onclick="back()">Back</button>
 </div>
 
-<!-- Game 2: Tap Speed -->
+<!-- Game 2: Tap Challenge -->
 <div id="game2" class="game">
-  <h2>Tap Speed Challenge</h2>
+  <h2>Tap Challenge</h2>
   <p>Taps: <span id="taps">0</span></p>
   <button onclick="tap()">TAP FAST</button>
   <button onclick="back()">Back</button>
@@ -57,21 +40,21 @@ canvas{
 
 <!-- Game 3: Guess Number -->
 <div id="game3" class="game">
-  <h2>Guess The Number (1–5)</h2>
+  <h2>Guess The Number (1–10)</h2>
   <input id="guess" type="number">
   <button onclick="check()">Guess</button>
   <p id="result"></p>
   <button onclick="back()">Back</button>
 </div>
 
-<!-- Game 4: Endless Runner -->
+<!-- Game 4: Math Quiz -->
 <div id="game4" class="game">
-  <h2>Endless Runner</h2>
-  <p>Score: <span id="runnerScore">0</span></p>
-  <canvas id="runner" width="300" height="400"></canvas>
-  <button onclick="runnerMove(-1)">⬅️</button>
-  <button onclick="runnerMove(1)">➡️</button>
-  <button onclick="backRunner()">Back</button>
+  <h2>Math Quiz</h2>
+  <p id="quizQ">?</p>
+  <input id="quizA" type="number">
+  <button onclick="quizCheck()">Submit</button>
+  <p id="quizResult"></p>
+  <button onclick="back()">Back</button>
 </div>
 
 <!-- Game 5: Car Racing -->
@@ -86,6 +69,7 @@ canvas{
 
 <script>
 // General functions
+let points=0;
 function show(id){
   document.getElementById("menu").style.display="none";
   document.querySelectorAll(".game").forEach(g=>g.style.display="none");
@@ -99,60 +83,38 @@ function back(){
 // Game 1: Catch The Ball
 let score1=0, ball=document.getElementById("ball");
 ball.onclick=()=>{
-  score1++;
+  score1++; points++;
   document.getElementById("score1").innerText=score1;
+  document.getElementById("points").innerText=points;
   ball.style.left=Math.random()*(window.innerWidth-50)+"px";
   ball.style.top=Math.random()*(window.innerHeight-150)+"px";
 }
 
-// Game 2: Tap Speed
+// Game 2: Tap Challenge
 let taps=0;
-function tap(){taps++;document.getElementById("taps").innerText=taps}
+function tap(){taps++; points++; document.getElementById("taps").innerText=taps; document.getElementById("points").innerText=points;}
 
 // Game 3: Guess Number
-let num=Math.floor(Math.random()*5)+1;
+let num=Math.floor(Math.random()*10)+1;
 function check(){
   let g=document.getElementById("guess").value;
-  document.getElementById("result").innerText=(g==num)?"🎉 Correct":"❌ Try Again";
+  if(g==num){document.getElementById("result").innerText="🎉 Correct"; points+=2;} 
+  else {document.getElementById("result").innerText="❌ Try Again";}
+  document.getElementById("points").innerText=points;
 }
 
-// Game 4: Endless Runner
-const runnerCanvas=document.getElementById("runner");
-const runnerCtx=runnerCanvas.getContext("2d");
-let runnerPlayer={x:130,y:340,w:40,h:40};
-let runnerObs=[];
-let runnerScore=0;
-let runnerSpeed=3;
-
-function runnerMove(dir){
-  runnerPlayer.x += dir*40;
-  if(runnerPlayer.x<0) runnerPlayer.x=0;
-  if(runnerPlayer.x>260) runnerPlayer.x=260;
+// Game 4: Math Quiz
+let a=Math.floor(Math.random()*10)+1;
+let b=Math.floor(Math.random()*10)+1;
+document.getElementById("quizQ").innerText=`${a} + ${b} = ?`;
+function quizCheck(){
+  let ans=document.getElementById("quizA").value;
+  if(ans==a+b){document.getElementById("quizResult").innerText="✅ Correct"; points+=3;} 
+  else {document.getElementById("quizResult").innerText="❌ Wrong";}
+  document.getElementById("points").innerText=points;
+  a=Math.floor(Math.random()*10)+1; b=Math.floor(Math.random()*10)+1;
+  document.getElementById("quizQ").innerText=`${a} + ${b} = ?`;
 }
-
-function runnerAddObs(){
-  runnerObs.push({x:Math.random()*260,y:-40,w:40,h:40});
-}
-
-function runnerDraw(){
-  runnerCtx.clearRect(0,0,300,400);
-  runnerCtx.fillStyle="lime";
-  runnerCtx.fillRect(runnerPlayer.x,runnerPlayer.y,runnerPlayer.w,runnerPlayer.h);
-  runnerCtx.fillStyle="red";
-  runnerObs.forEach(o=>{
-    o.y += runnerSpeed;
-    runnerCtx.fillRect(o.x,o.y,o.w,o.h);
-    if(o.x<runnerPlayer.x+40 && o.x+40>runnerPlayer.x && o.y<runnerPlayer.y+40 && o.y+40>runnerPlayer.y){
-      alert("Game Over! Score: "+runnerScore);
-      location.reload();
-    }
-  });
-  runnerScore++;
-  document.getElementById("runnerScore").innerText=runnerScore;
-}
-setInterval(runnerAddObs,1500);
-setInterval(runnerDraw,30);
-function backRunner(){back();}
 
 // Game 5: Car Racing
 const raceCanvas=document.getElementById("race");
@@ -179,13 +141,15 @@ function drawRace(){
     e.y += raceSpeed;
     raceCtx.fillRect(e.x,e.y,e.w,e.h);
     if(e.x<raceCar.x+40 && e.x+40>raceCar.x && e.y<raceCar.y+70 && e.y+70>raceCar.y){
-      alert("Crash! Score: "+raceScore);
+      alert("💥 Crash! Score: "+raceScore);
       location.reload();
     }
   });
   raceScore++;
+  points++; // points increase automatically
   raceSpeed += 0.002;
   document.getElementById("raceScore").innerText=raceScore;
+  document.getElementById("points").innerText=points;
 }
 setInterval(addRaceEnemy,1500);
 setInterval(drawRace,30);
