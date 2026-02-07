@@ -1,159 +1,117 @@
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Future-Ready Game Hub</title>
+<title>Future Skill & Productivity Hub</title>
 <style>
-body{margin:0;font-family:Arial;background:#020617;color:white;text-align:center;}
-button{padding:10px 20px;margin:5px;font-size:16px;}
-canvas{background:#111;display:block;margin:auto;}
-.game{display:none;}
-#ball{width:50px;height:50px;background:red;border-radius:50%;position:absolute;}
+body{margin:0;font-family:Arial;background:#f4f4f4;color:#111;}
+header{background:#0f172a;color:white;padding:20px;text-align:center;}
+nav{display:flex;justify-content:center;gap:15px;padding:10px;background:#111;color:white;flex-wrap:wrap;}
+nav a{color:white;text-decoration:none;padding:8px 12px;border-radius:5px;}
+nav a:hover{background:#0f172a;}
+section{padding:20px;max-width:900px;margin:auto;}
+.card{background:white;padding:15px;margin:10px 0;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.2);}
+button{padding:10px 15px;margin-top:10px;background:#0f172a;color:white;border:none;border-radius:5px;cursor:pointer;}
+button:hover{background:#1e293b;}
+input{padding:8px;margin-top:5px;width:80%;}
+#pointsDisplay{font-weight:bold;color:#0f172a;}
 </style>
 </head>
 <body>
 
-<h1>🌟 Future-Ready Game Hub</h1>
-<div id="menu">
-  <button onclick="show('game1')">Catch The Ball</button>
-  <button onclick="show('game2')">Tap Challenge</button>
-  <button onclick="show('game3')">Guess Number</button>
-  <button onclick="show('game4')">Math Quiz</button>
-  <button onclick="show('game5')">Car Racing</button>
-  <p>Points: <span id="points">0</span></p>
-</div>
+<header>
+  <h1>🌟 Future Skill & Productivity Hub</h1>
+  <p>Learn, Track, Earn – All in One</p>
+  <p>Points: <span id="pointsDisplay">0</span></p>
+</header>
 
-<!-- Game 1: Catch The Ball -->
-<div id="game1" class="game">
-  <h2>Catch The Ball</h2>
-  <p>Score: <span id="score1">0</span></p>
-  <div id="ball"></div>
-  <button onclick="back()">Back</button>
-</div>
+<nav>
+  <a href="#learning">Learning</a>
+  <a href="#tools">Tools</a>
+  <a href="#portfolio">Portfolio</a>
+</nav>
 
-<!-- Game 2: Tap Challenge -->
-<div id="game2" class="game">
-  <h2>Tap Challenge</h2>
-  <p>Taps: <span id="taps">0</span></p>
-  <button onclick="tap()">TAP FAST</button>
-  <button onclick="back()">Back</button>
-</div>
+<section id="learning">
+  <h2>💡 Learning Hub</h2>
+  <div class="card">
+    <h3>HTML/CSS Basics</h3>
+    <p>Learn to build professional websites.</p>
+    <button onclick="gainPoints(5)">Start Learning (+5 points)</button>
+  </div>
+  <div class="card">
+    <h3>Freelancing Tips</h3>
+    <p>Earn online by offering services.</p>
+    <button onclick="gainPoints(5)">Start Learning (+5 points)</button>
+  </div>
+</section>
 
-<!-- Game 3: Guess Number -->
-<div id="game3" class="game">
-  <h2>Guess The Number (1–10)</h2>
-  <input id="guess" type="number">
-  <button onclick="check()">Guess</button>
-  <p id="result"></p>
-  <button onclick="back()">Back</button>
-</div>
+<section id="tools">
+  <h2>🛠 Productivity Tools</h2>
+  <div class="card">
+    <h3>Expense Tracker</h3>
+    <p>Track your income & expenses efficiently.</p>
+    <input type="number" id="income" placeholder="Enter Income">
+    <input type="number" id="expense" placeholder="Enter Expense">
+    <button onclick="trackExpense()">Add & Calculate</button>
+    <p id="expenseResult"></p>
+  </div>
+  <div class="card">
+    <h3>Habit Tracker</h3>
+    <input type="text" id="habit" placeholder="Enter Habit">
+    <button onclick="addHabit()">Add Habit</button>
+    <ul id="habitList"></ul>
+  </div>
+</section>
 
-<!-- Game 4: Math Quiz -->
-<div id="game4" class="game">
-  <h2>Math Quiz</h2>
-  <p id="quizQ">?</p>
-  <input id="quizA" type="number">
-  <button onclick="quizCheck()">Submit</button>
-  <p id="quizResult"></p>
-  <button onclick="back()">Back</button>
-</div>
+<section id="portfolio">
+  <h2>💼 My Portfolio</h2>
+  <div class="card">
+    <h3>Web Development</h3>
+    <p>Projects showcase for clients.</p>
+    <button onclick="gainPoints(3)">View Projects (+3 points)</button>
+  </div>
+  <div class="card">
+    <h3>Freelance Services</h3>
+    <p>Hire me for web, design, or automation tasks.</p>
+    <button onclick="alert('Contact Me!')">Contact</button>
+  </div>
+</section>
 
-<!-- Game 5: Car Racing -->
-<div id="game5" class="game">
-  <h2>Car Racing</h2>
-  <p>Score: <span id="raceScore">0</span></p>
-  <canvas id="race" width="300" height="400"></canvas>
-  <button onclick="raceMove(-1)">⬅️</button>
-  <button onclick="raceMove(1)">➡️</button>
-  <button onclick="backRace()">Back</button>
-</div>
+<footer style="text-align:center;padding:15px;background:#111;color:white;">
+  <p>© 2026 Future Hub | All Rights Reserved</p>
+</footer>
 
 <script>
-// General functions
-let points=0;
-function show(id){
-  document.getElementById("menu").style.display="none";
-  document.querySelectorAll(".game").forEach(g=>g.style.display="none");
-  document.getElementById(id).style.display="block";
-}
-function back(){
-  document.getElementById("menu").style.display="block";
-  document.querySelectorAll(".game").forEach(g=>g.style.display="none");
+let points = 0;
+function gainPoints(p){
+  points += p;
+  document.getElementById('pointsDisplay').innerText = points;
 }
 
-// Game 1: Catch The Ball
-let score1=0, ball=document.getElementById("ball");
-ball.onclick=()=>{
-  score1++; points++;
-  document.getElementById("score1").innerText=score1;
-  document.getElementById("points").innerText=points;
-  ball.style.left=Math.random()*(window.innerWidth-50)+"px";
-  ball.style.top=Math.random()*(window.innerHeight-150)+"px";
+// Expense Tracker
+function trackExpense(){
+  let inc = Number(document.getElementById('income').value);
+  let exp = Number(document.getElementById('expense').value);
+  if(!isNaN(inc) && !isNaN(exp)){
+    let balance = inc - exp;
+    document.getElementById('expenseResult').innerText = 'Balance: ' + balance;
+    gainPoints(1); // reward points for using tool
+  } else {
+    alert('Please enter valid numbers!');
+  }
 }
 
-// Game 2: Tap Challenge
-let taps=0;
-function tap(){taps++; points++; document.getElementById("taps").innerText=taps; document.getElementById("points").innerText=points;}
-
-// Game 3: Guess Number
-let num=Math.floor(Math.random()*10)+1;
-function check(){
-  let g=document.getElementById("guess").value;
-  if(g==num){document.getElementById("result").innerText="🎉 Correct"; points+=2;} 
-  else {document.getElementById("result").innerText="❌ Try Again";}
-  document.getElementById("points").innerText=points;
+// Habit Tracker
+function addHabit(){
+  let habit = document.getElementById('habit').value;
+  if(habit){
+    let li = document.createElement('li');
+    li.innerText = habit;
+    document.getElementById('habitList').appendChild(li);
+    document.getElementById('habit').value = '';
+    gainPoints(1);
+  }
 }
-
-// Game 4: Math Quiz
-let a=Math.floor(Math.random()*10)+1;
-let b=Math.floor(Math.random()*10)+1;
-document.getElementById("quizQ").innerText=`${a} + ${b} = ?`;
-function quizCheck(){
-  let ans=document.getElementById("quizA").value;
-  if(ans==a+b){document.getElementById("quizResult").innerText="✅ Correct"; points+=3;} 
-  else {document.getElementById("quizResult").innerText="❌ Wrong";}
-  document.getElementById("points").innerText=points;
-  a=Math.floor(Math.random()*10)+1; b=Math.floor(Math.random()*10)+1;
-  document.getElementById("quizQ").innerText=`${a} + ${b} = ?`;
-}
-
-// Game 5: Car Racing
-const raceCanvas=document.getElementById("race");
-const raceCtx=raceCanvas.getContext("2d");
-let raceCar={x:130,y:330,w:40,h:70};
-let raceEnemies=[];
-let raceScore=0;
-let raceSpeed=3;
-
-function raceMove(dir){
-  raceCar.x += dir*40;
-  if(raceCar.x<0) raceCar.x=0;
-  if(raceCar.x>260) raceCar.x=260;
-}
-
-function addRaceEnemy(){raceEnemies.push({x:Math.random()*260,y:-80,w:40,h:70});}
-
-function drawRace(){
-  raceCtx.clearRect(0,0,300,400);
-  raceCtx.fillStyle="lime";
-  raceCtx.fillRect(raceCar.x,raceCar.y,raceCar.w,raceCar.h);
-  raceCtx.fillStyle="red";
-  raceEnemies.forEach(e=>{
-    e.y += raceSpeed;
-    raceCtx.fillRect(e.x,e.y,e.w,e.h);
-    if(e.x<raceCar.x+40 && e.x+40>raceCar.x && e.y<raceCar.y+70 && e.y+70>raceCar.y){
-      alert("💥 Crash! Score: "+raceScore);
-      location.reload();
-    }
-  });
-  raceScore++;
-  points++; // points increase automatically
-  raceSpeed += 0.002;
-  document.getElementById("raceScore").innerText=raceScore;
-  document.getElementById("points").innerText=points;
-}
-setInterval(addRaceEnemy,1500);
-setInterval(drawRace,30);
-function backRace(){back();}
 </script>
 
 </body>
