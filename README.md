@@ -1,7 +1,7 @@
-<html>
+m<html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Games Hub</title>
+<title>2D Video Games Hub</title>
 <style>
 body{
   margin:0;
@@ -30,7 +30,7 @@ canvas{
 </head>
 <body>
 
-<h1>🎮 All Games Hub</h1>
+<h1>🎮 2D Video Games Hub</h1>
 <div id="menu">
   <button onclick="show('game1')">Catch The Ball</button>
   <button onclick="show('game2')">Tap Speed</button>
