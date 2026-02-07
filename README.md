@@ -4,16 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Future Pro Hub</title>
 <meta name="description" content="Future Pro Hub - Modern Portfolio, Skills, Tools & Freelance Hub">
-<link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
-  --primary:#0f172a;
-  --secondary:#1e293b;
-  --accent:#3b82f6;
-  --bg:#f0f2f5;
-  --text:#111;
+  --primary:#0f172a;--secondary:#1e293b;--accent:#3b82f6;--bg:#f0f2f5;--text:#111;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
 body{background:var(--bg);color:var(--text);transition:0.3s;}
@@ -51,6 +44,10 @@ body.dark .card{background:#1a202c;color:white;}
 body.dark input{background:#111;color:white;border:1px solid #555;}
 body.dark footer{background:#1e293b;}
 </style>
+
+<!-- Manifest inside HTML for single-file PWA -->
+<link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;Future Pro Hub&quot;,&quot;short_name&quot;:&quot;FP Hub&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#3b82f6&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/png&quot;},{&quot;src&quot;:&quot;https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/png&quot;}]}">
+
 </head>
 <body>
 
@@ -152,54 +149,29 @@ body.dark footer{background:#1e293b;}
 </footer>
 
 <script>
-let points=0;
+// Dark mode toggle
 document.getElementById('darkToggle').addEventListener('change',()=>{document.body.classList.toggle('dark');});
+
+// Points system
+let points=0;
 function gainPoints(p){points+=p;alert('Points: '+points);}
+
+// Expense tracker
 function trackExpense(){let inc=Number(document.getElementById('income').value),exp=Number(document.getElementById('expense').value);document.getElementById('balance').innerText="Balance: "+(inc-exp);}
+
+// Habit tracker
 function addHabit(){let h=document.getElementById('habit').value;if(h){let li=document.createElement('li');li.innerText=h;document.getElementById('habitList').appendChild(li);}}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('service-worker.js');}
+
+// Service worker registration (PWA)
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([`
+    const CACHE_NAME='future-pro-hub-cache-v1';
+    const urlsToCache=['/','index.html','https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'];
+    self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(urlsToCache)))});
+    self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});
+  `],{type:'application/javascript'})));
+}
 </script>
 
 </body>
-</html>{
-  "name": "Future Pro Hub",
-  "short_name": "FP Hub",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#3b82f6",
-  "icons": [
-    {
-      "src": "https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}const CACHE_NAME = 'future-pro-hub-cache-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
-];
-
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache){
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
-
-self.addEventListener('fetch', function(event){
-  event.respondWith(
-    caches.match(event.request).then(function(response){
-      return response || fetch(event.request);
-    })
-  );
-});
+</html>
