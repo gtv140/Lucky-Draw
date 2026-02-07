@@ -4,6 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Future Pro Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- PWA manifest -->
+<link rel="manifest" href="manifest.json">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
 body{background:#f0f2f5;color:#111;}
@@ -25,7 +29,6 @@ h2{font-size:2em;color:#0f172a;margin-bottom:20px;text-align:center;}
 input{padding:8px;margin-top:5px;width:80%;}
 #pointsDisplay{font-weight:bold;color:#0f172a;}
 </style>
-<link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -42,6 +45,7 @@ input{padding:8px;margin-top:5px;width:80%;}
   <a href="#contact">Contact</a>
 </nav>
 
+<!-- Services Section -->
 <section id="services">
   <h2>🚀 My Services</h2>
   <div class="cards">
@@ -63,6 +67,7 @@ input{padding:8px;margin-top:5px;width:80%;}
   </div>
 </section>
 
+<!-- Portfolio Section -->
 <section id="portfolio">
   <h2>💼 Portfolio</h2>
   <div class="cards">
@@ -84,6 +89,7 @@ input{padding:8px;margin-top:5px;width:80%;}
   </div>
 </section>
 
+<!-- Tools Section -->
 <section id="tools">
   <h2>🛠 Mini Tools</h2>
   <div class="cards">
@@ -103,6 +109,7 @@ input{padding:8px;margin-top:5px;width:80%;}
   </div>
 </section>
 
+<!-- Contact Section -->
 <section id="contact">
   <h2>📩 Contact Me</h2>
   <div class="cards">
@@ -130,6 +137,8 @@ input{padding:8px;margin-top:5px;width:80%;}
 
 <script>
 let points = 0;
+
+// Add points for actions
 function gainPoints(p){
   points += p;
   document.getElementById('pointsDisplay').innerText = points;
